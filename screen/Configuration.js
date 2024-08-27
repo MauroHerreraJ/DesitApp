@@ -23,14 +23,16 @@ function Configuration() {
         asignada: 'asignada',
     })
 
-    // const [isButtonEnabled, setIsButtonEnabled] = useState(false)
-    // useEffect(() => {
-    //     if (licencias.length > 0 ) {
-    //         setIsButtonEnabled(true);
-    //     } else {
-    //         setIsButtonEnabled(false);
-    //     }
-    // }, [licencias]);
+    const [isButtonEnabled, setIsButtonEnabled] = useState(false)
+    useEffect(() => {
+         if (licencias.nombre  && licencias.documento && licencias.codlincencia) {
+             setIsButtonEnabled(true);
+         } else {
+             setIsButtonEnabled(false);
+         }
+     }, [licencias]);
+
+
     const [isLoading, setIsLoading] = useState(false);
 
 
@@ -155,7 +157,7 @@ function Configuration() {
 
 
                 <View style={styles.buttonContainer}>
-                    <SaveButton onPress={saveData} />
+                    <SaveButton onPress={saveData} isEnabled={isButtonEnabled} />
                 </View>
             </>
             )}
@@ -182,7 +184,7 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginHorizontal: 1,
-        marginTop: 130,
+        marginTop: 150,
     },
     imputContainer: {
         padding: 20,

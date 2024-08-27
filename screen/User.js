@@ -25,7 +25,23 @@ function User() {
 
   // Verifica si hay datos de licencia para mostrar
   if (!licencia) {
-    return <Text>No posee Licencia...</Text>;
+    return (
+      <>
+        <View style={styles.withoutLicenseContainer}>
+
+          <View >
+            <Text style={styles.withoutLicense}>No posee Licencia...</Text>
+          </View>
+          <View style={styles.withoutLicenseImage}>
+            <Image source={require("../assets/logonuevo.png")}
+              style={{ width: 59, height: 59 }} />
+          </View>
+          <View>
+            <Text style={styles.textImage}>Producto desarrollado por Desit SA</Text>
+          </View>
+        </View>
+      </>
+    );
   }
 
   return (
@@ -108,9 +124,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 20,
     fontSize: 15
-  }, 
+  },
   imageContainer: {
     alignItems: "center",
     marginBottom: 20
+  },
+  withoutLicense: {
+    marginTop:150,
+    fontFamily: "open-sans",
+    fontSize: 19
+  },
+  withoutLicenseImage: {
+    marginTop: 480
+  },
+  withoutLicenseContainer:{
+    alignItems:"center"
   }
+
+
 });
