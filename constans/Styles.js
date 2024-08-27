@@ -5,7 +5,7 @@ export const styles1=StyleSheet.create({
     buttonContainer: {
         padding: 16,
         margin:8, 
-        borderRadius: 8,
+        borderRadius: 26,
         paddingVertical:40,
         paddingHorizontal:60,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
@@ -24,7 +24,7 @@ export const styles2=StyleSheet.create({
     buttonContainer: {
         padding: 16,
         margin:8, 
-        borderRadius: 8,
+        borderRadius: 26,
         paddingVertical:40,
         paddingHorizontal:50,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',

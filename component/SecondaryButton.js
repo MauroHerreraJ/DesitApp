@@ -13,7 +13,7 @@ function SecondaryButton({ onPress, name, styles, text, text2 }) {
         </Pressable>
     </View>
 }
-
+ 
 export default SecondaryButton;
 
 const styless = StyleSheet.create({

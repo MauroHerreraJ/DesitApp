@@ -38,7 +38,7 @@ function AllButtons() {
               critico:  "1"
             }
           )        
-        } catch (error) {
+        } catch (error) { 
           console.log(error);
       };}      
 
