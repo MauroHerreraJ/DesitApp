@@ -17,8 +17,8 @@ export default PrimaryButton;
 
 const styles = StyleSheet.create({
     buttonContainer: { 
-        padding: 50,
-        margin: 16,
+        padding: 40,
+        margin: 10,
         borderRadius: 26,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
         backgroundColor: GlobalStyles.colors.titlecolor,

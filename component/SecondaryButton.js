@@ -22,6 +22,7 @@ const styless = StyleSheet.create({
     },
     textButton: {
         color: "white",
-        fontSize: 15
+        fontSize: 15,
+        
     }
 })

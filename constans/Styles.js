@@ -3,11 +3,11 @@ import { GlobalStyles } from "./Colors";
 
 export const styles1=StyleSheet.create({
     buttonContainer: {
-        padding: 16,
+        padding:30,
         margin:8, 
+        width:189,
+        height:150,
         borderRadius: 26,
-        paddingVertical:40,
-        paddingHorizontal:60,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
         backgroundColor: GlobalStyles.colors.colorbuttonI,
         elevation: 4,
@@ -22,11 +22,11 @@ export const styles1=StyleSheet.create({
 
 export const styles2=StyleSheet.create({
     buttonContainer: {
-        padding: 16,
+        padding:30,
         margin:8, 
+        width:189,
+        height:150,
         borderRadius: 26,
-        paddingVertical:40,
-        paddingHorizontal:50,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
         backgroundColor: GlobalStyles.colors.botonI,
         elevation: 4,
