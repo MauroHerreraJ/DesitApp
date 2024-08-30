@@ -23,22 +23,21 @@ function AuthorizedNavigation() {
   return (
     <BottomTabs.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#0d47a1' },
-        headerTintColor: "white",
-
+        headerStyle: { backgroundColor: '#e8c39e',height:120 },
+        headerTintColor: "black",
       }}>
 
       <BottomTabs.Screen
         name='Desit'
         component={AllButtons}
         options={{
-          title: "Desit",
+          title: "",
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (<Ionicons name='home-outline' size={size} color={color} />),
           headerLeft: () => (
             <Image
-              source={require("./assets/logonuevo.png")}
-              style={{ width: 43, height: 43, marginLeft: 10 }}
+              source={require("./assets/cba-logo3.png")}
+              style={{ width: 230, height: 80, marginLeft: 90 , marginTop:-20 }}
             />
           ),
         }} />
@@ -162,8 +161,8 @@ export default function App() {
                 options={{
                   presentation: "modal",
                   title: "Información del Sistema",
-                  headerStyle: { backgroundColor: '#0d47a1' },
-                  headerTintColor: "white"
+                  headerStyle: { backgroundColor: '#e8c39e',height:120  },
+                  headerTintColor: "black"
                 }}
               />
               <Stack.Screen

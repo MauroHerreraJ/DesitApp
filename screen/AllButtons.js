@@ -1,6 +1,5 @@
 import { View, StyleSheet, ImageBackground, Vibration, ScrollView } from "react-native";
-import { styles1 } from "../constans/Styles";
-import { styles2 } from "../constans/Styles";
+import { styles1,styles2,styles3,styles4 } from "../constans/Styles";
 import { savePost } from "../util/Api";
 
 import PrimaryButton from "../component/PrimaryButton";
@@ -60,54 +59,53 @@ function AllButtons() {
 
   return (
     <>
-      <ImageBackground
-        source={require('../assets/126353.jpg')}
-        resizeMode="cover"
-        style={styles.rootScreen}>
-        <ScrollView 
-          horizontal={true} 
-          showsHorizontalScrollIndicator={false} 
-          style={styles.scrollContainer}
-          contentContainerStyle={styles.seconButtonContainer}
-          snapToInterval={410} snapToAlignment="start"
-          scrollEnabled={false}
-          
-        >
-          <SecondaryButton onPress={fireButton} name={"local-fire-department"} styles={styles1.buttonContainer}
-            text={"Alerta"}
-            text2={"Incendio"} />
-          <SecondaryButton onPress={medicButton} name={"local-hospital"} styles={styles2.buttonContainer}
-            text={"Emergencia"}
-            text2={"Médica"} />
-          <SecondaryButton onPress={medicButton} name={"local-hospital"} styles={styles2.buttonContainer}
-            text={"Emergencia"}
-            text2={"Médica"} />
-            <SecondaryButton onPress={medicButton} name={"local-hospital"} styles={styles2.buttonContainer}
-            text={"Emergencia"}
-            text2={"Médica"} />
-        </ScrollView>
-        <View style={styles.primaryButtonContainer}>
-          <PrimaryButton onPress={primaryButton} />
-        </View>
-      </ImageBackground>
-    </>
-  );
+            <ImageBackground
+                source={require('../assets/civico.jpg')}
+                resizeMode="cover"
+                style={styles.rootScreen}>
+                <View style={styles.seconButtonContainer}>
+                    <SecondaryButton onPress={fireButton} name={"wb-sunny"} styles={styles1.buttonContainer}
+                        text={"Encender"}
+                        text2={"Reflector"} />
+                    <SecondaryButton onPress={medicButton} name={"notifications-active"} styles={styles2.buttonContainer}
+                        text={"Encender"}
+                        text2={"Sirena"} />
+                </View>
+                <View style={styles.lowSeconButtonContainer}>
+                    <SecondaryButton onPress={fireButton} name={"pause-circle"} styles={styles3.buttonContainer}
+                        text={""}
+                        text2={"Desactivar"} />
+                    <SecondaryButton onPress={medicButton} name={"telegram"} styles={styles4.buttonContainer}
+                        text={"Enviar"}
+                        text2={"Mensaje"} />
+                </View>
+                <View style={styles.primaryButtonContainer}>
+                    <PrimaryButton onPress={primaryButton} />
+                </View>
+            </ImageBackground>
+        </>
+    );
 }
 export default AllButtons;
 
 const styles = StyleSheet.create({
-  primaryButtonContainer: {
-    flex: 0.8
+    primaryButtonContainer: {
+        marginTop:20
+    },
+    seconButtonContainer: {
+        marginTop:70,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    lowSeconButtonContainer: {
+      marginTop:10,
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
   },
-  scrollContainer: {
-    flex: 1,
-  },
-  seconButtonContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  rootScreen: {
-    flex: 1
-  }
-});
+    
+    rootScreen: {
+        flex: 1
+    }
+})

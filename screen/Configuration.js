@@ -98,7 +98,7 @@ function Configuration() {
 
 
     return (
-        <ImageBackground source={require('../assets/126353.jpg')} resizeMode="cover" style={styles.rootScreen}>
+        <ImageBackground source={require('../assets/civico.jpg')} resizeMode="cover" style={styles.rootScreen}>
             {isLoading ? ( // Mostrar el ActivityIndicator si isLoading es true
                 <View style={styles.containerActivity}>
                 <ActivityIndicator size="large" color="#ffffff" />
@@ -202,16 +202,16 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         flexDirection: "row",
         alignItems: "center",
-        borderColor: "#dbd9df",
-        backgroundColor: "#dbd9df",
+        borderColor: "#ffffff",
+        backgroundColor: "#ffffff",
         borderRadius: 6,
 
     },
     textImput: {
         flex: 1,
         borderWidth: 1,
-        borderColor: "#dbd9df",
-        backgroundColor: "#dbd9df",
+        borderColor: "#ffffff",
+        backgroundColor: "#ffffff",
         width: "100%",
         padding: 12,
         color: "#120438",

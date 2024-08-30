@@ -6,7 +6,7 @@ function SecondaryButton({ onPress, name, styles, text, text2 }) {
     return <View >
         <Pressable onPress={onPress} style={({ pressed }) => pressed && styless.pressed}>
             <View style={styles}>
-                <MaterialIcons name={name} size={40} color="white" />
+                <MaterialIcons name={name} size={50} color="white" />
                 <Text style={styless.textButton}>{text}</Text>
                 <Text style={styless.textButton}>{text2}</Text>
             </View>

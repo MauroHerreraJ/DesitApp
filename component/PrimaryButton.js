@@ -6,7 +6,7 @@ function PrimaryButton({ onPress }) {
     return <View >
         <Pressable onPress={onPress} style={({ pressed }) => pressed && styles.pressed}>
             <View style={styles.buttonContainer}>
-               <Ionicons name="warning" size={80} color="white"/>
+               <Ionicons name="warning" size={90} color="white"/>
                <Text style={styles.textButton}>Pánico</Text>
             </View>
         </Pressable>
