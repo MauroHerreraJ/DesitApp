@@ -98,7 +98,7 @@ function Configuration() {
 
 
     return (
-        <ImageBackground source={require('../assets/civico.jpg')} resizeMode="cover" style={styles.rootScreen}>
+        <ImageBackground source={require('../assets/fondoApp5.jpg')} resizeMode="cover" style={styles.rootScreen}>
             {isLoading ? ( // Mostrar el ActivityIndicator si isLoading es true
                 <View style={styles.containerActivity}>
                 <ActivityIndicator size="large" color="#ffffff" />

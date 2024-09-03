@@ -9,7 +9,7 @@ function Welcome({ navigation }) {
     return (
         <>
             <ImageBackground
-                source={require('../assets/126353.jpg')}
+                source={require('../assets/civico.jpg')}
                 resizeMode="cover"
                 style={styles.rootScreen}>
                 <View>
@@ -25,11 +25,8 @@ function Welcome({ navigation }) {
                         </Pressable>
                     </View>
                     <View style={styles.imageContainer}>
-                        <Image source={require("../assets/logonuevo.png")}
-                            style={{ width: 70, height: 70 }} />
-                    </View>
-                    <View>
-                        <Text style={styles.textImage}>Desit SA</Text>
+                        <Image source={require("../assets/cba-logo3.png")}
+                            style={{ width: 270, height: 100}} />
                     </View>
                 </View>
             </ImageBackground>
@@ -45,28 +42,31 @@ const styles = StyleSheet.create({
     },
     text: {
         padding: 16,
-        fontSize: 30,
-        color: "white",
+        fontSize: 35,
+        color: "#EB7F27",
         textAlign: "center",
-        marginTop: 80
+        marginTop: 80,
+        fontFamily: "open-sans-bold"
     },
     buttonContainer: {
-        marginTop: 350
+        marginTop: 350,
+         alignItems: "center"
     },
     button: {
-        padding: 16,
+        padding:20,
+        width:250,
+        height:70,
         margin: 8,
         borderRadius: 8,
-        paddingVertical: 25,
-        paddingHorizontal: 71,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-        backgroundColor: '#0d47a1',
+        backgroundColor: '#EB7F27',
         elevation: 4,
         shadowColor: 'black',
         shadowOpacity: 0.25,
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 8,
-        alignItems: "center"
+        alignItems: "center",
+        opacity:0.9
 
     },
     textButton: {
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     },
    imageContainer:{
     alignItems:"center",
-    marginTop:80,
+    marginTop:70,
     marginBottom:5
    },
    textImage: {

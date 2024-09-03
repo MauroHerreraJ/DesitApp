@@ -23,8 +23,8 @@ function AuthorizedNavigation() {
   return (
     <BottomTabs.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#e8c39e',height:120 },
-        headerTintColor: "black",
+        headerStyle: { backgroundColor: '#EB7F27',height:120 },
+        headerTintColor: "white",
       }}>
 
       <BottomTabs.Screen
@@ -61,7 +61,7 @@ function NoAuthorizedNavigation() {
   return (
     <BottomTabs.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#0d47a1' },
+        headerStyle: { backgroundColor: '#EB7F27',height:120 },
         headerTintColor: "white",
 
       }}>
@@ -162,7 +162,7 @@ export default function App() {
                   presentation: "modal",
                   title: "Información del Sistema",
                   headerStyle: { backgroundColor: '#e8c39e',height:120  },
-                  headerTintColor: "black"
+                  headerTintColor: "white"
                 }}
               />
               <Stack.Screen

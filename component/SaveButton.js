@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         overflow: "hidden",
     },
     buttonInnerContainer: {
-        backgroundColor: '#0d47a1',
+        backgroundColor: '#EB7F27',
         paddingVertical: 18,
         paddingHorizontal: 16,
     },
