@@ -98,7 +98,12 @@ function Configuration() {
 
 
     return (
-        <ImageBackground source={require('../assets/fondoApp5.jpg')} resizeMode="cover" style={styles.rootScreen}>
+        <ImageBackground 
+        source={require('../assets/civico.jpg')} 
+        resizeMode="cover" 
+        style={styles.rootScreen}
+        imageStyle={styles.backgroundImage}
+        >
             {isLoading ? ( // Mostrar el ActivityIndicator si isLoading es true
                 <View style={styles.containerActivity}>
                 <ActivityIndicator size="large" color="#ffffff" />
@@ -168,7 +173,7 @@ export default Configuration;
 
 const styles = StyleSheet.create({
     rootScreen: {
-        flex: 1
+        flex: 1,
     },
     buttonContainer: {
         marginTop: 210,
@@ -224,4 +229,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
       },     
+      backgroundImage: {
+        opacity: 0.7,
+    }
 })

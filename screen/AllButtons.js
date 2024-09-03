@@ -60,7 +60,7 @@ function AllButtons() {
   return (
     <>
             <ImageBackground
-                source={require('../assets/fondoApp5.jpg')}
+                source={require('../assets/civico.jpg')}
                 resizeMode="cover"
                 style={styles.rootScreen}>
                 <View style={styles.seconButtonContainer}>

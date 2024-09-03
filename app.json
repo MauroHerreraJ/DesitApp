@@ -7,7 +7,7 @@
     "icon": "./assets/logonuevo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/cba-logo2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

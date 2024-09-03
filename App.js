@@ -161,7 +161,7 @@ export default function App() {
                 options={{
                   presentation: "modal",
                   title: "Información del Sistema",
-                  headerStyle: { backgroundColor: '#e8c39e',height:120  },
+                  headerStyle: { backgroundColor: '#EB7F27',height:150 },
                   headerTintColor: "white"
                 }}
               />
