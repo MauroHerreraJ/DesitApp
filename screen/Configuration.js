@@ -12,7 +12,6 @@ import SaveButton from "../component/SaveButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-
 function Configuration() {
 
     const navigation = useNavigation();
@@ -152,14 +151,11 @@ function Configuration() {
                     </View>
                 </View>
 
-
-
                 <View style={styles.buttonContainer1}>
                     <TouchableOpacity style={styles.buttonUpdateI} onPress={Borrar}>
                         <Text>Borrar</Text>
                     </TouchableOpacity>
                 </View>
-
 
                 <View style={styles.buttonContainer}>
                     <SaveButton onPress={saveData} isEnabled={isButtonEnabled} />
