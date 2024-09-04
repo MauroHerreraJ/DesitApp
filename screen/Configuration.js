@@ -226,6 +226,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
       },     
       backgroundImage: {
-        opacity: 0.7,
+        opacity: 1,
     }
 })
