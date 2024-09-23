@@ -1,10 +1,10 @@
-import { View, TouchableOpacity, Text, TouchableWithoutFeedback, Keyboard, TextInput,ActivityIndicator } from "react-native";
+import { View, TouchableOpacity, Text, TouchableWithoutFeedback, Keyboard, TextInput, ActivityIndicator } from "react-native";
 import { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { ImageBackground, StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import { GlobalStyles } from "../constans/Colors";
-import { getLicenciaId, updateLicencia } from "../util/Api";
+import { postUserData } from "../util/Api";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import IconButton from "../UI/IconButton";
@@ -15,22 +15,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 function Configuration() {
 
     const navigation = useNavigation();
-    const [licencias, setLicencias] = useState({
-        documento: '',
-        nombre: '',
-        codlincencia: '',
-        asignada: 'asignada',
-    })
+    const [licencias, setLicencias] = useState()
+    const [result,setResult]= useState(null)
 
-    const [isButtonEnabled, setIsButtonEnabled] = useState(false)
-    useEffect(() => {
-         if (licencias.nombre  && licencias.documento && licencias.codlincencia) {
-             setIsButtonEnabled(true);
-         } else {
-             setIsButtonEnabled(false);
-         }
-     }, [licencias]);
-
+    // const [isButtonEnabled, setIsButtonEnabled] = useState(false)
+    // useEffect(() => {
+    //     if (licencias.nombre && licencias.documento && licencias.codlincencia) {
+    //         setIsButtonEnabled(true);
+    //     } else {
+    //         setIsButtonEnabled(false);
+    //     }
+    // }, [licencias]);
+ 
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -39,46 +35,18 @@ function Configuration() {
         setLicencias({ ...licencias, [name]: value });
     }
 
-    const handleSubmit = async () => {
-        setIsLoading(true); // Mostrar el ActivityIndicator al iniciar la carga
+   
 
+    const saveData = async () => {
         try {
-            const res = await getLicenciaId(licencias.codlincencia);
-            if (res.data.length > 0) {
-                const Licencia = {
-                    storagelicencia: res.data[0].codlincencia,
-                    storageCuenta: res.data[0].cuenta,
-                    storageCentral: res.data[0].central,
-                    storageAsignada: res.data[0].asignada,
-                    storagecodmovil: res.data[0].codmovil,
-                    storageNombre: res.data[0].nombre,
-                    storageDocumento: res.data[0].documento,
-                    storageId: res.data[0]._id
-                };
-
-                if (res.data[0].asignada === 'asignada') {
-                    alert('La licencia que intenta utilizar se encuentra asignada a otro usuario');
-                } else {
-                    await AsyncStorage.setItem('@licencias', JSON.stringify(Licencia));
-                    console.log("Datos Guardados");
-
-                    await updateLicencia(res.data[0]._id, licencias);
-                    navigation.replace('Principal');
-                }
-            } else {
-                console.log("No se encuentran datos");
-            }
+          const result = await postUserData(licencias);
+          setResult(result)
+          console.log('Respuesta del servidor:', result);
         } catch (error) {
-            console.error("Error al cargar los datos", error);
-        } finally {
-            setIsLoading(false); // Ocultar el ActivityIndicator al finalizar la carga
+          console.error('Error al hacer el POST:', error);
         }
-    };
-
-    function saveData() {
-        handleSubmit();
-        console.log(licencias);
-    }
+      };
+    
 
     function modalHandler() {
         navigation.navigate("User");
@@ -90,77 +58,133 @@ function Configuration() {
         });
     }, [navigation, modalHandler]);
 
+
+
     const Borrar = async () => {
         await AsyncStorage.removeItem('@licencias');
         console.log('borrado');
     };
-
-
     return (
-        <ImageBackground 
-        source={require('../assets/civico.jpg')} 
-        resizeMode="cover" 
-        style={styles.rootScreen}
-        imageStyle={styles.backgroundImage}
+        <ImageBackground
+            // source={require('../assets/civico.jpg')}
+            // resizeMode="cover"
+            // style={styles.rootScreen}
+            // imageStyle={styles.backgroundImage}
         >
             {isLoading ? ( // Mostrar el ActivityIndicator si isLoading es true
                 <View style={styles.containerActivity}>
-                <ActivityIndicator size="large" color="#ffffff" />
+                    <ActivityIndicator size="large" color="#ffffff" />
                 </View>
             ) : (
-
-            <>
-                <View style={styles.imputContainer}>
-                    <View>
+                <>
+                    <View style={styles.imputContainer}>
                         <View>
-                            <Text style={styles.text}>Apellido/Nombre</Text>
-                            <View style={styles.textContainer}>
-                                <TextInput
-                                    style={styles.textImput}
-                                    placeholder='Ingrese Apellido/Nombre'
-                                    onChangeText={(text) => handleChange("nombre", text)}
-                                    value={licencias}
-                                />
-                                <MaterialIcons name={"person"} size={24} color="#000" style={styles.icon} />
+                            {/* <View>
+                                <Text style={styles.text}>Código de Alta</Text>
+                                <View style={styles.textContainer}>
+                                    <TextInput
+                                        style={styles.textImput}
+                                        placeholder='Ingrese código de alta'
+                                        onChangeText={(text) => handleChange("codAlta", text)}
+                                        value={licencias}
+                                    />
+                                    <MaterialIcons name={"vpn-key"} size={24} color="#000" style={styles.icon} />
+                                </View>
+                            </View> */}
+                            <View>
+                                <Text style={styles.text}>Nombre</Text>
+                                <View style={styles.textContainer}>
+                                    <TextInput
+                                        style={styles.textImput}
+                                        placeholder='Ingrese Nombre'
+                                        onChangeText={(text) => handleChange("name", text)}
+                                        value={licencias}
+                                    />
+                                    <MaterialIcons name={"person"} size={24} color="#000" style={styles.icon} />
+                                </View>
                             </View>
-                        </View>
-                        <View>
-                            <Text style={styles.text}>Documento</Text>
-                            <View style={styles.textContainer}>
-                                <TextInput
-                                    style={styles.textImput}
-                                    placeholder='Ingrese número de documento'
-                                    onChangeText={(text) => handleChange("documento", text)}
-                                    value={licencias}
-                                />
-                                <MaterialIcons name={"subtitles"} size={24} color="#000" style={styles.icon} />
+                            {/* <View>
+                                <Text style={styles.text}>Apellido</Text>
+                                <View style={styles.textContainer}>
+                                    <TextInput
+                                        style={styles.textImput}
+                                        placeholder='Ingrese Apellido'
+                                        onChangeText={(text) => handleChange("Apellido", text)}
+                                        value={licencias}
+                                    />
+                                    <MaterialIcons name={"person"} size={24} color="#000" style={styles.icon} />
+                                </View>
                             </View>
-                        </View>
-                        <View>
-                            <Text style={styles.text}>Código de Alta</Text>
-                            <View style={styles.textContainer}>
-                                <TextInput
-                                    style={styles.textImput}
-                                    placeholder='Ingrese código de alta'
-                                    onChangeText={(text) => handleChange("codlincencia", text)}
-                                    value={licencias}
-                                />
-                                <MaterialIcons name={"vpn-key"} size={24} color="#000" style={styles.icon} />
+                            <View>
+                                <Text style={styles.text}>Documento</Text>
+                                <View style={styles.textContainer}>
+                                    <TextInput
+                                        style={styles.textImput}
+                                        placeholder='Ingrese número de documento'
+                                        onChangeText={(text) => handleChange("Documento", text)}
+                                        value={licencias}
+                                    />
+                                    <MaterialIcons name={"subtitles"} size={24} color="#000" style={styles.icon} />
+                                </View>
                             </View>
+                            <View>
+                                <Text style={styles.text}>Dirección</Text>
+                                <View style={styles.textContainer}>
+                                    <TextInput
+                                        style={styles.textImput}
+                                        placeholder='Ingrese su dirección'
+                                        onChangeText={(text) => handleChange("Direccion", text)}
+                                        value={licencias}
+                                    />
+                                    <MaterialIcons name={"subtitles"} size={24} color="#000" style={styles.icon} />
+                                </View>
+                            </View>
+                            <View>
+                                <Text style={styles.text}>Barrio</Text>
+                                <View style={styles.textContainer}>
+                                    <TextInput
+                                        style={styles.textImput}
+                                        placeholder='Ingrese su barrio'
+                                        onChangeText={(text) => handleChange("Barrio", text)}
+                                        value={licencias}
+                                    />
+                                    <MaterialIcons name={"subtitles"} size={24} color="#000" style={styles.icon} />
+                                </View>
+                            </View> */}
+                            {/* <View>
+                                <Text style={styles.text}>Número de equipo</Text>
+                                <View style={styles.textContainer}>
+                                    <TextInput
+                                        style={styles.textImput}
+                                        placeholder='Ingrese número de equipo'
+                                        onChangeText={(text) => handleChange("equipo", text)}
+                                        value={licencias}
+                                    />
+                                    <MaterialIcons name={"vpn-key"} size={24} color="#000" style={styles.icon} />
+                                </View>
+                            </View> */}
                         </View>
                     </View>
-                </View>
+{/* 
+                    <View style={styles.buttonContainer1}>
+                        <TouchableOpacity style={styles.buttonUpdateI} onPress={Borrar}>
+                            <Text>Borrar</Text>
+                        </TouchableOpacity>
+                    </View> */}
 
-                <View style={styles.buttonContainer1}>
-                    <TouchableOpacity style={styles.buttonUpdateI} onPress={Borrar}>
-                        <Text>Borrar</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styles.buttonContainer}>
-                    <SaveButton onPress={saveData} isEnabled={isButtonEnabled} />
-                </View>
-            </>
+                    <View style={styles.buttonContainer}>
+                        <SaveButton onPress={saveData} />
+                        {result && (
+        <View style={{ marginTop: 20 }}>
+          <Text style={{ fontWeight: 'bold' }}>Resultado del servidor:</Text>
+          <Text>{JSON.stringify(result, null, 2)}</Text>
+        </View>
+      )}
+                    </View>
+                    <View>
+                 
+                    </View>
+                </>
             )}
         </ImageBackground>
     );
@@ -185,11 +209,10 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginHorizontal: 1,
-        marginTop: 150,
+        marginTop: 20,
     },
     imputContainer: {
-        padding: 20,
-        marginTop: 50
+        padding: 1,
     },
     text: {
         color: "white"
@@ -224,8 +247,8 @@ const styles = StyleSheet.create({
     containerActivity: {
         flex: 1,
         justifyContent: 'center',
-      },     
-      backgroundImage: {
+    },
+    backgroundImage: {
         opacity: 1,
     }
 })

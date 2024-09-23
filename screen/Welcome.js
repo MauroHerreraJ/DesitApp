@@ -9,7 +9,7 @@ function Welcome({ navigation }) {
     return (
         <>
             <ImageBackground
-                source={require('../assets/civico.jpg')}
+                source={require('../assets/126353.jpg')}
                 resizeMode="cover"
                 style={styles.rootScreen}>
                 <View>

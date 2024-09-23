@@ -1,21 +1,20 @@
-// const res = await fetch(`https://7376-44-223-2-238.ngrok-free.app/api/licencia/${codlincencia}` , {
-//const APIH = "http://10.0.2.2:4000/api/history";
-
 import axios from 'axios';
 
-const API = "https://dashdesit-e4022df63ef8.herokuapp.com/api/licencia";
-const APIG = "https://dashdesit-e4022df63ef8.herokuapp.com/api/licenciaCod/";
-const APU = "https://dashdesit-e4022df63ef8.herokuapp.com/api/licencia";
-const APIH = "https://dashdesit-e4022df63ef8.herokuapp.com/api/history"; 
- 
-export const getLicencia = async () => (await axios.get(`${API}`)
-                                    .catch(error => console.log(error)));
+// Define la URL base
+const API_URL = "https://desit-server-staging-2dab81ac495c.herokuapp.com/api/v1/client";
 
-export const getLicenciaId = async (codlincencia) => await (axios.get(`${APIG}` + `${codlincencia}`)
-                                    .catch(error => console.log(error))
-);
+// Función para hacer un POST
+export const postUserData = async (data) => {
+  try {
+    const response = await axios.post(API_URL, data, {
+      headers: {
+        'Content-Type': 'application/json', // Configura los headers, si es necesario
+      },
+    });
 
-export const updateLicencia = (id, licencias) => axios.put(`${APU}` + '/' + `${id}`, licencias);
-
-export const savePost = async (newPost) => await axios.post(`${APIH}`, newPost);
-
+    return response.data; // Devuelve los datos de la respuesta
+  } catch (error) {
+    console.error("Error en el POST", error);
+    throw error; // Lanza el error para manejarlo fuera de la función si es necesario
+  }
+};

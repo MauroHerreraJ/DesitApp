@@ -61,7 +61,7 @@ function NoAuthorizedNavigation() {
   return (
     <BottomTabs.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#EB7F27',height:120 },
+        headerStyle: { backgroundColor: '#EB7F27',height:100 },
         headerTintColor: "white",
 
       }}>
