@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Text, TouchableWithoutFeedback, Keyboard, TextInput, ActivityIndicator } from "react-native";
+import { View, TouchableOpacity, Text, TouchableWithoutFeedback, Button, Keyboard, TextInput, ActivityIndicator, ScrollView } from "react-native";
 import { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { ImageBackground, StyleSheet } from "react-native";
@@ -15,18 +15,29 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 function Configuration() {
 
     const navigation = useNavigation();
-    const [licencias, setLicencias] = useState()
-    const [result,setResult]= useState(null)
+    const [licencias, setLicencias] = useState({
+        panicAppCode: "",
+        targetDeviceCode: "",
+        accountNumber: "",
+        Nombre: "",
+        Apellido: "",
+        Documento: "",
+        Direccion: "",
+        Barrio: ""
+    });
 
-    // const [isButtonEnabled, setIsButtonEnabled] = useState(false)
-    // useEffect(() => {
-    //     if (licencias.nombre && licencias.documento && licencias.codlincencia) {
-    //         setIsButtonEnabled(true);
-    //     } else {
-    //         setIsButtonEnabled(false);
-    //     }
-    // }, [licencias]);
- 
+    const [currentStep, setCurrentStep] = useState(1);
+    const [result, setResult] = useState(null)
+
+    const [isButtonEnabled, setIsButtonEnabled] = useState(false)
+    useEffect(() => {
+        if (licencias.panicAppCode && licencias.targetDeviceCode && licencias.accountNumber&&licencias.Nombre&&licencias.Apellido&&licencias.Documento&&licencias.Direccion&&licencias.Barrio) {
+            setIsButtonEnabled(true);
+        } else {
+            setIsButtonEnabled(false);
+        }
+    }, [licencias]);
+
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -35,18 +46,46 @@ function Configuration() {
         setLicencias({ ...licencias, [name]: value });
     }
 
-   
-
     const saveData = async () => {
-        try {
-          const result = await postUserData(licencias);
-          setResult(result)
-          console.log('Respuesta del servidor:', result);
-        } catch (error) {
-          console.error('Error al hacer el POST:', error);
+        // Construir el array que espera el servidor
+        const data = {
+            panicAppCode: licencias.panicAppCode,
+            targetDeviceCode: licencias.targetDeviceCode,
+            accountNumber: licencias.accountNumber,
+            userCustomFields: [
+                {
+                    Nombre: licencias.Nombre
+                },
+                {
+                    Apellido: licencias.Apellido
+                },
+                {
+                    Documento: licencias.Documento
+                },
+                {
+                    Direccion: licencias.Direccion
+                },
+                {
+                    Barrio: licencias.Barrio
+                }
+            ]
         }
-      };
-    
+        try {
+            setIsLoading(true);
+            console.log('Datos enviados al servidor:', data);
+            const result = await postUserData(data);  // Enviar el array
+            setResult(result);
+            await AsyncStorage.setItem('@licencias', JSON.stringify(data));
+            console.log("Datos Guardados");
+            navigation.replace('Principal');
+
+            console.log('Respuesta del servidor:', result);
+        } catch (error) {
+            console.error('Error al hacer el POST:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     function modalHandler() {
         navigation.navigate("User");
@@ -64,53 +103,88 @@ function Configuration() {
         await AsyncStorage.removeItem('@licencias');
         console.log('borrado');
     };
-    return (
-        <ImageBackground
-            // source={require('../assets/civico.jpg')}
-            // resizeMode="cover"
-            // style={styles.rootScreen}
-            // imageStyle={styles.backgroundImage}
-        >
-            {isLoading ? ( // Mostrar el ActivityIndicator si isLoading es true
-                <View style={styles.containerActivity}>
-                    <ActivityIndicator size="large" color="#ffffff" />
-                </View>
-            ) : (
-                <>
-                    <View style={styles.imputContainer}>
-                        <View>
-                            {/* <View>
-                                <Text style={styles.text}>Código de Alta</Text>
+    // Función para avanzar al siguiente paso
+    const nextStep = () => {
+        if (currentStep < 3) setCurrentStep(currentStep + 1);
+    };
+
+    // Función para retroceder al paso anterior
+    const previousStep = () => {
+        if (currentStep > 1) setCurrentStep(currentStep - 1);
+    };
+
+    // Renderizado condicional basado en el paso actual
+    const renderStep = () => {
+        switch (currentStep) {
+            case 1:
+                return (
+                    <>
+                        <View style={styles.imputContainer}>
+
+                            <View>
+                                <Text style={styles.text}>Codigo de alta</Text>
                                 <View style={styles.textContainer}>
                                     <TextInput
                                         style={styles.textImput}
-                                        placeholder='Ingrese código de alta'
-                                        onChangeText={(text) => handleChange("codAlta", text)}
-                                        value={licencias}
+                                        placeholder='Ingrese Código'
+                                        onChangeText={(text) => handleChange("panicAppCode", text)}
+                                        value={licencias.panicAppCode}
                                     />
                                     <MaterialIcons name={"vpn-key"} size={24} color="#000" style={styles.icon} />
                                 </View>
-                            </View> */}
+                            </View>
+                            <View>
+                                <Text style={styles.text}>Número de Equipo</Text>
+                                <View style={styles.textContainer}>
+                                    <TextInput
+                                        style={styles.textImput}
+                                        placeholder='Ingrese número de equipo'
+                                        onChangeText={(text) => handleChange("targetDeviceCode", text)}
+                                        value={licencias.targetDeviceCode}
+                                    />
+                                    <MaterialIcons name={"vpn-key"} size={24} color="#000" style={styles.icon} />
+                                </View>
+                            </View>
+                            <View>
+                                <Text style={styles.text}>Número de Cuenta</Text>
+                                <View style={styles.textContainer}>
+                                    <TextInput
+                                        style={styles.textImput}
+                                        placeholder='Ingrese número de cuenta'
+                                        onChangeText={(text) => handleChange("accountNumber", text)}
+                                        value={licencias.accountNumber}
+                                    />
+                                    <MaterialIcons name={"vpn-key"} size={24} color="#000" style={styles.icon} />
+                                </View>
+                            </View>
+                        </View>
+                    </>
+                );
+            case 2:
+                return (
+                    <>
+                        <View style={styles.imputContainer}>
+
                             <View>
                                 <Text style={styles.text}>Nombre</Text>
                                 <View style={styles.textContainer}>
                                     <TextInput
                                         style={styles.textImput}
-                                        placeholder='Ingrese Nombre'
-                                        onChangeText={(text) => handleChange("name", text)}
-                                        value={licencias}
+                                        placeholder='Ingrese su Nombre'
+                                        onChangeText={(text) => handleChange("Nombre", text)}
+                                        value={licencias.Nombre}
                                     />
                                     <MaterialIcons name={"person"} size={24} color="#000" style={styles.icon} />
                                 </View>
                             </View>
-                            {/* <View>
+                            <View>
                                 <Text style={styles.text}>Apellido</Text>
                                 <View style={styles.textContainer}>
                                     <TextInput
                                         style={styles.textImput}
-                                        placeholder='Ingrese Apellido'
+                                        placeholder='Ingrese su Apellido'
                                         onChangeText={(text) => handleChange("Apellido", text)}
-                                        value={licencias}
+                                        value={licencias.Apellido}
                                     />
                                     <MaterialIcons name={"person"} size={24} color="#000" style={styles.icon} />
                                 </View>
@@ -120,86 +194,97 @@ function Configuration() {
                                 <View style={styles.textContainer}>
                                     <TextInput
                                         style={styles.textImput}
-                                        placeholder='Ingrese número de documento'
+                                        placeholder='Ingrese su documento'
                                         onChangeText={(text) => handleChange("Documento", text)}
-                                        value={licencias}
+                                        value={licencias.Documento}
                                     />
                                     <MaterialIcons name={"subtitles"} size={24} color="#000" style={styles.icon} />
                                 </View>
                             </View>
                             <View>
-                                <Text style={styles.text}>Dirección</Text>
-                                <View style={styles.textContainer}>
-                                    <TextInput
-                                        style={styles.textImput}
-                                        placeholder='Ingrese su dirección'
-                                        onChangeText={(text) => handleChange("Direccion", text)}
-                                        value={licencias}
-                                    />
-                                    <MaterialIcons name={"subtitles"} size={24} color="#000" style={styles.icon} />
-                                </View>
+                            <Text style={styles.text}>Direccion</Text>
+                            <View style={styles.textContainer}>
+                                <TextInput
+                                    style={styles.textImput}
+                                    placeholder='Ingrese su direccion'
+                                    onChangeText={(text) => handleChange("Direccion", text)}
+                                    value={licencias.Direccion}
+                                />
+                                <MaterialIcons name={"location-on"} size={24} color="#000" style={styles.icon} />
                             </View>
+                        </View>
                             <View>
                                 <Text style={styles.text}>Barrio</Text>
                                 <View style={styles.textContainer}>
                                     <TextInput
                                         style={styles.textImput}
-                                        placeholder='Ingrese su barrio'
+                                        placeholder='Ingrese su Barrio'
                                         onChangeText={(text) => handleChange("Barrio", text)}
-                                        value={licencias}
+                                        value={licencias.Barrio}
                                     />
-                                    <MaterialIcons name={"subtitles"} size={24} color="#000" style={styles.icon} />
+                                    <MaterialIcons name={"location-on"} size={24} color="#000" style={styles.icon} />
                                 </View>
-                            </View> */}
-                            {/* <View>
-                                <Text style={styles.text}>Número de equipo</Text>
-                                <View style={styles.textContainer}>
-                                    <TextInput
-                                        style={styles.textImput}
-                                        placeholder='Ingrese número de equipo'
-                                        onChangeText={(text) => handleChange("equipo", text)}
-                                        value={licencias}
-                                    />
-                                    <MaterialIcons name={"vpn-key"} size={24} color="#000" style={styles.icon} />
-                                </View>
-                            </View> */}
+                            </View>
                         </View>
-                    </View>
-{/* 
-                    <View style={styles.buttonContainer1}>
-                        <TouchableOpacity style={styles.buttonUpdateI} onPress={Borrar}>
-                            <Text>Borrar</Text>
-                        </TouchableOpacity>
-                    </View> */}
+                        <View style={styles.buttonContainer1}>
+                    <TouchableOpacity style={styles.buttonUpdateI} onPress={Borrar}>
+                        <Text>Borrar</Text>
+                    </TouchableOpacity>
+                </View>
+                    </>
+                );
+            default:
+                return null;
+        }
+    };
 
-                    <View style={styles.buttonContainer}>
-                        <SaveButton onPress={saveData} />
-                        {result && (
-        <View style={{ marginTop: 20 }}>
-          <Text style={{ fontWeight: 'bold' }}>Resultado del servidor:</Text>
-          <Text>{JSON.stringify(result, null, 2)}</Text>
-        </View>
-      )}
+    
+
+    return (
+        <>
+            {isLoading ? (
+                <View style={styles.containerActivity}>
+                    <ActivityIndicator size="large" color="#ffffff" />
+                </View>
+            ) : (
+                <>
+                    <View >
+                        {renderStep()}
                     </View>
-                    <View>
-                 
-                    </View>
+                   
+                        {currentStep > 1 && (
+                            <View style={styles.button2}>
+                            <Button title="Anterior" onPress={previousStep}  />
+                            </View>
+                        )}
+                        {currentStep < 2 ? (
+                            <View style={styles.button1}>
+                            <Button title="Siguiente" onPress={nextStep} />
+                            </View>
+                        ) : (
+                            
+                             <View style={styles.button}>
+                    <SaveButton onPress={saveData} isEnabled={isButtonEnabled} />
+                </View>
+                        )}                    
                 </>
             )}
-        </ImageBackground>
+        </>
     );
 }
+
 export default Configuration;
 
 const styles = StyleSheet.create({
     rootScreen: {
         flex: 1,
     },
-    buttonContainer: {
-        marginTop: 210,
-    },
+  button:{
+    marginTop:1
+
+  },
     buttonUpdateI: {
-        paddingTop: 10,
+        paddingTop: 5,
         paddingBottom: 10,
         borderRadius: 5,
         marginTop: 30,
@@ -212,10 +297,11 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     imputContainer: {
-        padding: 1,
+        padding: 20,
+        marginTop: 5
     },
     text: {
-        color: "white"
+        color: "black"
     },
     container: {
         flexDirection: 'row',
@@ -250,5 +336,17 @@ const styles = StyleSheet.create({
     },
     backgroundImage: {
         opacity: 1,
+    },
+    button1:{
+        marginTop:30,
+        width:189,
+        height:100,
+        marginLeft: 215,
+    },
+    button2:{
+        marginTop:10,
+        width:189,
+        height:100,
+        marginLeft: 215,
     }
 })

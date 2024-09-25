@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Define la URL base
-const API_URL = "https://desit-server-staging-2dab81ac495c.herokuapp.com/api/v1/client";
+const API_URL = "https://desit-server-staging-2dab81ac495c.herokuapp.com/api/v1/user";
 
 // Función para hacer un POST
 export const postUserData = async (data) => {

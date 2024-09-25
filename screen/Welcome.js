@@ -8,10 +8,6 @@ function Welcome({ navigation }) {
     }
     return (
         <>
-            <ImageBackground
-                source={require('../assets/126353.jpg')}
-                resizeMode="cover"
-                style={styles.rootScreen}>
                 <View>
                     <View style={styles.textContainer}>
                         <Text style={styles.text}>Bienvenido!</Text>
@@ -29,7 +25,6 @@ function Welcome({ navigation }) {
                             style={{ width: 270, height: 100}} />
                     </View>
                 </View>
-            </ImageBackground>
         </>
     )
 }
