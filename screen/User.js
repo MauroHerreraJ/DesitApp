@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     fontFamily: "open-sans-bold",
   },
   textData: {
-    fontSize: 18,
+    fontSize: 17,
     fontFamily: "open-sans",
   },
   underline: {

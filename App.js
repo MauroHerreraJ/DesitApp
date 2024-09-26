@@ -47,7 +47,7 @@ function AuthorizedNavigation() {
         component={User}
         options={{
           title: "Sistema",
-          tabBarIcon: ({ color, size }) => <Ionicons name='person-outline' size={size} color={color} />
+          tabBarIcon: ({ color, size }) => <Ionicons name='settings-outline' size={size} color={color} />
           
         }} />
 
