@@ -1,6 +1,8 @@
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image,TouchableOpacity } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
+import { useCallback } from "react";
+import { useFocusEffect } from '@react-navigation/native';
 
 function User() {
   const [licencia, setLicencia] = useState(null);
@@ -10,18 +12,29 @@ function User() {
     try {
       const storedLicencia = await AsyncStorage.getItem('@licencias');
       if (storedLicencia) {
-        setLicencia(JSON.parse(storedLicencia));
-        console.log(storedLicencia)
+        const parsedLicencia = JSON.parse(storedLicencia);
+        setLicencia(parsedLicencia.licenseCreated); // Accedemos a "licenseCreated"
+        console.log(parsedLicencia.licenseCreated);
       }
     } catch (error) {
       console.log("Error al cargar la licencia", error);
     }
   };
+  // Ejecuta la función cada vez que la pantalla se enfoca
+  useFocusEffect(
+    useCallback(() => {
+      loadLicencia();
+    }, [])
+  );
 
   // Ejecuta la función cuando se monta el componente
   useEffect(() => {
     loadLicencia();
   }, []);
+  const Borrar = async () => {
+    await AsyncStorage.removeItem('@licencias');
+    console.log('borrado');
+};
 
   // Verifica si hay datos de licencia para mostrar
   if (!licencia) {
@@ -49,37 +62,32 @@ function User() {
       <View style={styles.dataContainer}>
         <View>
           <View style={styles.textContainer}>
-            <Text style={styles.text}>Usuario: </Text>
-            <Text style={styles.textData}>{licencia.storageNombre}</Text>
+            <Text style={styles.text}>Cuenta: </Text>
+            <Text style={styles.textData}>{licencia.accountNumber}</Text>
             <View style={styles.underline}></View>
           </View>
-
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>Documento: </Text>
-            <Text style={styles.textData}>{licencia.storageDocumento}</Text>
-            <View style={styles.underline}></View>
-          </View>
-
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>Código de Alta: </Text>
-            <Text style={styles.textData}>{licencia.storagelicencia}</Text>
-            <View style={styles.underline}></View>
-          </View>
-
           <View style={styles.textContainer}>
             <Text style={styles.text}>Licencia: </Text>
-            <Text style={styles.textData}>{licencia.storagecodmovil}</Text>
+            <Text style={styles.textData}>{licencia.code}</Text>
             <View style={styles.underline}></View>
           </View>
-
           <View style={styles.textContainer}>
-            <Text style={styles.text}>Central: </Text>
-            <Text style={styles.textData}>{licencia.storageCentral}</Text>
+            <Text style={styles.text}>Equipo: </Text>
+            <Text style={styles.textData}>{licencia.targetDeviceCode}</Text>
+            <View style={styles.underline}></View>
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>Estado </Text>
+            <Text style={styles.textData}>{licencia.status}</Text>
             <View style={styles.underline}></View>
           </View>
         </View>
       </View>
-
+      <View style={styles.buttonContainer1}>
+                    <TouchableOpacity style={styles.buttonUpdateI} onPress={Borrar}>
+                        <Text>Borrar</Text>
+                    </TouchableOpacity>
+                </View>
       <View style={styles.imageContainer}>
         <Image source={require("../assets/logonuevo.png")}
           style={{ width: 59, height: 59 }} />
@@ -130,15 +138,15 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   withoutLicense: {
-    marginTop:150,
+    marginTop: 150,
     fontFamily: "open-sans",
     fontSize: 19
   },
   withoutLicenseImage: {
     marginTop: 480
   },
-  withoutLicenseContainer:{
-    alignItems:"center"
+  withoutLicenseContainer: {
+    alignItems: "center"
   }
 
 

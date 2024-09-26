@@ -14,6 +14,7 @@ import AllButtons from './screen/AllButtons';
 import Configuration from './screen/Configuration';
 import User from './screen/User';
 import welcome from './screen/Welcome';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -41,14 +42,13 @@ function AuthorizedNavigation() {
             />
           ),
         }} />
-
       <BottomTabs.Screen
-        name="Configuration"
-        component={Configuration}
+        name="User"
+        component={User}
         options={{
-          title: "Configuración",
-          tabBarIcon: ({ color, size }) => <Ionicons name='settings-outline' size={size} color={color} />
-
+          title: "Sistema",
+          tabBarIcon: ({ color, size }) => <Ionicons name='person-outline' size={size} color={color} />
+          
         }} />
 
     </BottomTabs.Navigator>
@@ -135,7 +135,7 @@ export default function App() {
 
   return (
     <>
-      <StatusBar style='light' />
+      <StatusBar style='black' />
       
        
           <NavigationContainer>

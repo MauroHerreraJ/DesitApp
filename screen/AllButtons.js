@@ -1,62 +1,26 @@
-import { View, StyleSheet, ImageBackground, Vibration, ScrollView } from "react-native";
+import { View, StyleSheet, ImageBackground,Alert } from "react-native";
 import { styles1,styles2,styles3,styles4 } from "../constans/Styles";
-import { savePost } from "../util/Api";
+import * as SMS from 'expo-sms';
 
 import PrimaryButton from "../component/PrimaryButton";
 import SecondaryButton from "../component/SecondaryButton";
 
-function AllButtons() {
 
-  const cuentaStore = 1
 
-  const primaryButton = async () => {
-    try {
-      Vibration.vibrate(500);
-      await savePost(
-        {
-          evento: "120",
-          evecuenta: cuentaStore,
-          detalle: "Pánico",
-          critico: "1"
-        }
+  const AllButtons = () => {
+
+    const sendSms = async () => {
+      const { result } = await SMS.sendSMSAsync(
+        ['3513869148'], // Número de teléfono al que enviar el SMS
+        'Hola, este es un mensaje de prueba!' // Contenido del SMS
       );
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const fireButton = async () => {
-    try {
-      Vibration.vibrate(500);
-      await savePost(
-        {
-          evento: "130",
-          evecuenta: cuentaStore,
-          detalle: "Incendio",
-          critico: "1"
-        }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const medicButton = async () => {
-    try {
-      Vibration.vibrate(500);
-      await savePost(
-        {
-          evento: "140",
-          evecuenta: cuentaStore,
-          detalle: "Médico",
-          critico: "1"
-        }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
+      if (result === 'sent') {
+        Alert.alert('SMS enviado');
+      } else {
+        Alert.alert('Error al enviar SMS');
+      }
+    };
+  
   return (
     <>
             <ImageBackground
@@ -64,28 +28,28 @@ function AllButtons() {
                 resizeMode="cover"
                 style={styles.rootScreen}>
                 <View style={styles.seconButtonContainer}>
-                    <SecondaryButton onPress={fireButton} name={"wb-sunny"} styles={styles1.buttonContainer}
+                    <SecondaryButton onPress={sendSms} name={"wb-sunny"} styles={styles1.buttonContainer}
                         text={"Encender"}
                         text2={"Reflector"} />
-                    <SecondaryButton onPress={medicButton} name={"notifications-active"} styles={styles2.buttonContainer}
+                    <SecondaryButton onPress={sendSms} name={"notifications-active"} styles={styles2.buttonContainer}
                         text={"Encender"}
                         text2={"Sirena"} />
                 </View>
                 <View style={styles.lowSeconButtonContainer}>
-                    <SecondaryButton onPress={fireButton} name={"pause-circle"} styles={styles3.buttonContainer}
+                    <SecondaryButton onPress={sendSms} name={"pause-circle"} styles={styles3.buttonContainer}
                         text={""}
                         text2={"Desactivar"} />
-                    <SecondaryButton onPress={medicButton} name={"telegram"} styles={styles4.buttonContainer}
+                    <SecondaryButton onPress={sendSms} name={"telegram"} styles={styles4.buttonContainer}
                         text={"Enviar"}
                         text2={"Mensaje"} />
                 </View>
                 <View style={styles.primaryButtonContainer}>
-                    <PrimaryButton onPress={primaryButton} />
+                    <PrimaryButton onPress={sendSms} />
                 </View>
             </ImageBackground>
         </>
     );
-}
+  }
 export default AllButtons;
 
 const styles = StyleSheet.create({

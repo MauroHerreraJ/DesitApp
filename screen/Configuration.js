@@ -11,7 +11,6 @@ import IconButton from "../UI/IconButton";
 import SaveButton from "../component/SaveButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 function Configuration() {
 
     const navigation = useNavigation();
@@ -28,7 +27,6 @@ function Configuration() {
 
     const [currentStep, setCurrentStep] = useState(1);
     const [result, setResult] = useState(null)
-
     const [isButtonEnabled, setIsButtonEnabled] = useState(false)
     useEffect(() => {
         if (licencias.panicAppCode && licencias.targetDeviceCode && licencias.accountNumber&&licencias.Nombre&&licencias.Apellido&&licencias.Documento&&licencias.Direccion&&licencias.Barrio) {
@@ -75,7 +73,7 @@ function Configuration() {
             console.log('Datos enviados al servidor:', data);
             const result = await postUserData(data);  // Enviar el array
             setResult(result);
-            await AsyncStorage.setItem('@licencias', JSON.stringify(data));
+            await AsyncStorage.setItem('@licencias', JSON.stringify(result));
             console.log("Datos Guardados");
             navigation.replace('Principal');
 
@@ -87,22 +85,7 @@ function Configuration() {
         }
     };
 
-    function modalHandler() {
-        navigation.navigate("User");
-    }
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: () => <IconButton title="Tap me" onPress={modalHandler} />
-        });
-    }, [navigation, modalHandler]);
-
-
-
-    const Borrar = async () => {
-        await AsyncStorage.removeItem('@licencias');
-        console.log('borrado');
-    };
+    
     // Función para avanzar al siguiente paso
     const nextStep = () => {
         if (currentStep < 3) setCurrentStep(currentStep + 1);
@@ -120,7 +103,6 @@ function Configuration() {
                 return (
                     <>
                         <View style={styles.imputContainer}>
-
                             <View>
                                 <Text style={styles.text}>Codigo de alta</Text>
                                 <View style={styles.textContainer}>
@@ -226,11 +208,6 @@ function Configuration() {
                                 </View>
                             </View>
                         </View>
-                        <View style={styles.buttonContainer1}>
-                    <TouchableOpacity style={styles.buttonUpdateI} onPress={Borrar}>
-                        <Text>Borrar</Text>
-                    </TouchableOpacity>
-                </View>
                     </>
                 );
             default:
