@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Image,TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import { useCallback } from "react";
@@ -34,14 +34,12 @@ function User() {
   const Borrar = async () => {
     await AsyncStorage.removeItem('@licencias');
     console.log('borrado');
-};
-
+  };
   // Verifica si hay datos de licencia para mostrar
   if (!licencia) {
     return (
       <>
         <View style={styles.withoutLicenseContainer}>
-
           <View >
             <Text style={styles.withoutLicense}>No posee Licencia...</Text>
           </View>
@@ -84,10 +82,10 @@ function User() {
         </View>
       </View>
       <View style={styles.buttonContainer1}>
-                    <TouchableOpacity style={styles.buttonUpdateI} onPress={Borrar}>
-                        <Text>Borrar</Text>
-                    </TouchableOpacity>
-                </View>
+        <TouchableOpacity style={styles.buttonUpdateI} onPress={Borrar}>
+          <Text>Borrar</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.imageContainer}>
         <Image source={require("../assets/logonuevo.png")}
           style={{ width: 59, height: 59 }} />
@@ -101,7 +99,6 @@ function User() {
 }
 
 export default User;
-
 const styles = StyleSheet.create({
   dataContainer: {
     flex: 1,
@@ -148,6 +145,4 @@ const styles = StyleSheet.create({
   withoutLicenseContainer: {
     alignItems: "center"
   }
-
-
 });

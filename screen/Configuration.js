@@ -1,13 +1,11 @@
-import { View, TouchableOpacity, Text, TouchableWithoutFeedback, Button, Keyboard, TextInput, ActivityIndicator, ScrollView } from "react-native";
-import { useLayoutEffect } from "react";
+import { View, Text, Button, TextInput, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { ImageBackground, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import { GlobalStyles } from "../constans/Colors";
 import { postUserData } from "../util/Api";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import IconButton from "../UI/IconButton";
 import SaveButton from "../component/SaveButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -29,7 +27,7 @@ function Configuration() {
     const [result, setResult] = useState(null)
     const [isButtonEnabled, setIsButtonEnabled] = useState(false)
     useEffect(() => {
-        if (licencias.panicAppCode && licencias.targetDeviceCode && licencias.accountNumber&&licencias.Nombre&&licencias.Apellido&&licencias.Documento&&licencias.Direccion&&licencias.Barrio) {
+        if (licencias.panicAppCode && licencias.targetDeviceCode && licencias.accountNumber && licencias.Nombre && licencias.Apellido && licencias.Documento && licencias.Direccion && licencias.Barrio) {
             setIsButtonEnabled(true);
         } else {
             setIsButtonEnabled(false);
@@ -85,7 +83,7 @@ function Configuration() {
         }
     };
 
-    
+
     // Función para avanzar al siguiente paso
     const nextStep = () => {
         if (currentStep < 3) setCurrentStep(currentStep + 1);
@@ -184,17 +182,17 @@ function Configuration() {
                                 </View>
                             </View>
                             <View>
-                            <Text style={styles.text}>Direccion</Text>
-                            <View style={styles.textContainer}>
-                                <TextInput
-                                    style={styles.textImput}
-                                    placeholder='Ingrese su direccion'
-                                    onChangeText={(text) => handleChange("Direccion", text)}
-                                    value={licencias.Direccion}
-                                />
-                                <MaterialIcons name={"location-on"} size={24} color="#000" style={styles.icon} />
+                                <Text style={styles.text}>Direccion</Text>
+                                <View style={styles.textContainer}>
+                                    <TextInput
+                                        style={styles.textImput}
+                                        placeholder='Ingrese su direccion'
+                                        onChangeText={(text) => handleChange("Direccion", text)}
+                                        value={licencias.Direccion}
+                                    />
+                                    <MaterialIcons name={"location-on"} size={24} color="#000" style={styles.icon} />
+                                </View>
                             </View>
-                        </View>
                             <View>
                                 <Text style={styles.text}>Barrio</Text>
                                 <View style={styles.textContainer}>
@@ -215,8 +213,6 @@ function Configuration() {
         }
     };
 
-    
-
     return (
         <>
             {isLoading ? (
@@ -228,22 +224,20 @@ function Configuration() {
                     <View >
                         {renderStep()}
                     </View>
-                   
-                        {currentStep > 1 && (
-                            <View style={styles.button2}>
-                            <Button title="Anterior" onPress={previousStep}  />
-                            </View>
-                        )}
-                        {currentStep < 2 ? (
-                            <View style={styles.button1}>
+                    {currentStep > 1 && (
+                        <View style={styles.button2}>
+                            <Button title="Anterior" onPress={previousStep} />
+                        </View>
+                    )}
+                    {currentStep < 2 ? (
+                        <View style={styles.button1}>
                             <Button title="Siguiente" onPress={nextStep} />
-                            </View>
-                        ) : (
-                            
-                             <View style={styles.button}>
-                    <SaveButton onPress={saveData} isEnabled={isButtonEnabled} />
-                </View>
-                        )}                    
+                        </View>
+                    ) : (
+                        <View style={styles.button}>
+                            <SaveButton onPress={saveData} isEnabled={isButtonEnabled} />
+                        </View>
+                    )}
                 </>
             )}
         </>
@@ -256,10 +250,10 @@ const styles = StyleSheet.create({
     rootScreen: {
         flex: 1,
     },
-  button:{
-    marginTop:1
+    button: {
+        marginTop: 1
 
-  },
+    },
     buttonUpdateI: {
         paddingTop: 5,
         paddingBottom: 10,
@@ -314,16 +308,16 @@ const styles = StyleSheet.create({
     backgroundImage: {
         opacity: 1,
     },
-    button1:{
-        marginTop:30,
-        width:189,
-        height:100,
+    button1: {
+        marginTop: 30,
+        width: 189,
+        height: 100,
         marginLeft: 215,
     },
-    button2:{
-        marginTop:10,
-        width:189,
-        height:100,
+    button2: {
+        marginTop: 10,
+        width: 189,
+        height: 100,
         marginLeft: 215,
     }
 })

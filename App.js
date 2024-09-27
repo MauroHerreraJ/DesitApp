@@ -5,17 +5,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from "@expo/vector-icons"
 import { Image } from 'react-native';
 import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
+
+import * as SplashScreen from 'expo-splash-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
 import AllButtons from './screen/AllButtons';
 import Configuration from './screen/Configuration';
 import User from './screen/User';
 import welcome from './screen/Welcome';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -24,10 +21,10 @@ function AuthorizedNavigation() {
   return (
     <BottomTabs.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#EB7F27',height:120 },
+        headerStyle: { backgroundColor: '#EB7F27', height: 120 },
         headerTintColor: "white",
+        tabBarLabelStyle: { fontSize: 13, width: '100%', paddingBottom: 1 }
       }}>
-
       <BottomTabs.Screen
         name='Desit'
         component={AllButtons}
@@ -38,7 +35,7 @@ function AuthorizedNavigation() {
           headerLeft: () => (
             <Image
               source={require("./assets/cba-logo3.png")}
-              style={{ width: 230, height: 80, marginLeft: 90 , marginTop:-20 }}
+              style={{ width: 230, height: 80, marginLeft: 90, marginTop: -20 }}
             />
           ),
         }} />
@@ -48,31 +45,27 @@ function AuthorizedNavigation() {
         options={{
           title: "Sistema",
           tabBarIcon: ({ color, size }) => <Ionicons name='settings-outline' size={size} color={color} />
-          
         }} />
-
     </BottomTabs.Navigator>
   );
-
 }
 
 function NoAuthorizedNavigation() {
-
   return (
     <BottomTabs.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#EB7F27',height:100 },
+        headerStyle: { backgroundColor: '#EB7F27', height: 100 },
         headerTintColor: "white",
-
       }}>
 
       <BottomTabs.Screen
         name="Welcome"
         component={welcome}
-        
-        options={{headerShown:false,
+
+        options={{
+          headerShown: false,
           tabBarStyle: { display: 'none' },
-          tabBarIcon:({color,size})=> <Ionicons name='home-outline' size={size} color={color}/>
+          tabBarIcon: ({ color, size }) => <Ionicons name='home-outline' size={size} color={color} />
         }}
       />
 
@@ -83,13 +76,10 @@ function NoAuthorizedNavigation() {
           tabBarStyle: { display: 'none' },
           title: "Configuración",
           tabBarIcon: ({ color, size }) => <Ionicons name='settings-outline' size={size} color={color} />
-
         }} />
-
     </BottomTabs.Navigator>
   );
 }
-
 
 
 export default function App() {
@@ -132,50 +122,46 @@ export default function App() {
     return null; // or a custom loading component
   }
 
-
   return (
     <>
       <StatusBar style='black' />
-      
-       
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName={isAuthorized ? "Principal" : "Secondary"}>
-            
-              <Stack.Screen
-                name="Secondary"
-                component={NoAuthorizedNavigation}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="Principal"
-                component={AuthorizedNavigation}
-                options={{ headerShown: false }}
-              />
-                <Stack.Screen
-              name='Welcome'
-              component={welcome}
-            />
-              <Stack.Screen
-                name="User"
-                component={User}
-                options={{
-                  presentation: "modal",
-                  title: "Información del Sistema",
-                  headerStyle: { backgroundColor: '#EB7F27',height:150 },
-                  headerTintColor: "white"
-                }}
-              />
-              <Stack.Screen
-                name="Configuration"
-                component={Configuration}
-              />
-              <Stack.Screen
-                name="Home"
-                component={AllButtons}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-         
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName={isAuthorized ? "Principal" : "Secondary"}>
+
+          <Stack.Screen
+            name="Secondary"
+            component={NoAuthorizedNavigation}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Principal"
+            component={AuthorizedNavigation}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name='Welcome'
+            component={welcome}
+          />
+          <Stack.Screen
+            name="User"
+            component={User}
+            options={{
+              presentation: "modal",
+              title: "Información del Sistema",
+              headerStyle: { backgroundColor: '#EB7F27', height: 150 },
+              headerTintColor: "white"
+            }}
+          />
+          <Stack.Screen
+            name="Configuration"
+            component={Configuration}
+          />
+          <Stack.Screen
+            name="Home"
+            component={AllButtons}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </>
   );
 }

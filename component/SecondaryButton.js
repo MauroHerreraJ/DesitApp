@@ -1,7 +1,6 @@
 import { View, Pressable, StyleSheet, Text } from "react-native"
 import { MaterialIcons } from "@expo/vector-icons";
 
-
 function SecondaryButton({ onPress, name, styles, text, text2 }) {
     return <View >
         <Pressable onPress={onPress} style={({ pressed }) => pressed && styless.pressed}>
@@ -13,7 +12,7 @@ function SecondaryButton({ onPress, name, styles, text, text2 }) {
         </Pressable>
     </View>
 }
- 
+
 export default SecondaryButton;
 
 const styless = StyleSheet.create({
@@ -23,6 +22,7 @@ const styless = StyleSheet.create({
     textButton: {
         color: "white",
         fontSize: 15,
-        
+        width: "100%",
+        textAlign: 'center',
     }
 })

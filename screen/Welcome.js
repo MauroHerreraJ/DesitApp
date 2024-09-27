@@ -66,7 +66,9 @@ const styles = StyleSheet.create({
     },
     textButton: {
         color: "white",
-        fontSize: 20
+        fontSize: 20,
+        width:"100%",
+        textAlign:"center"
     },
     rootScreen: {
         flex: 1

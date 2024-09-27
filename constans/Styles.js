@@ -1,12 +1,12 @@
-import { StyleSheet,Platform } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { GlobalStyles } from "./Colors";
 
-export const styles1=StyleSheet.create({
+export const styles1 = StyleSheet.create({
     buttonContainer: {
-        padding:30,
-        margin:8, 
-        width:189,
-        height:150,
+        padding: 30,
+        margin: 8,
+        width: 189,
+        height: 150,
         borderRadius: 26,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
         backgroundColor: GlobalStyles.colors.accent500,
@@ -19,13 +19,12 @@ export const styles1=StyleSheet.create({
     },
 })
 
-
-export const styles2=StyleSheet.create({
+export const styles2 = StyleSheet.create({
     buttonContainer: {
-        padding:30,
-        margin:8, 
-        width:189,
-        height:150,
+        padding: 30,
+        margin: 8,
+        width: 189,
+        height: 150,
         borderRadius: 26,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
         backgroundColor: GlobalStyles.colors.colorbuttonI,
@@ -36,15 +35,14 @@ export const styles2=StyleSheet.create({
         shadowRadius: 8,
         alignItems: "center"
     },
-
 })
 
-export const styles3=StyleSheet.create({
+export const styles3 = StyleSheet.create({
     buttonContainer: {
-        padding:30,
-        margin:8, 
-        width:189,
-        height:150,
+        padding: 30,
+        margin: 8,
+        width: 189,
+        height: 150,
         borderRadius: 26,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
         backgroundColor: GlobalStyles.colors.gray500,
@@ -55,15 +53,14 @@ export const styles3=StyleSheet.create({
         shadowRadius: 8,
         alignItems: "center"
     },
-
 })
 
-export const styles4=StyleSheet.create({
+export const styles4 = StyleSheet.create({
     buttonContainer: {
-        padding:30,
-        margin:8, 
-        width:189,
-        height:150,
+        padding: 30,
+        margin: 8,
+        width: 189,
+        height: 150,
         borderRadius: 26,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
         backgroundColor: "#0088cc",
@@ -74,5 +71,4 @@ export const styles4=StyleSheet.create({
         shadowRadius: 8,
         alignItems: "center"
     },
-
 })
