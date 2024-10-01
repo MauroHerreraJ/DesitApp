@@ -5,9 +5,11 @@ import { useState, useEffect } from "react";
 import { GlobalStyles } from "../constans/Colors";
 import { postUserData } from "../util/Api";
 import { MaterialIcons } from "@expo/vector-icons";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import SaveButton from "../component/SaveButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 function Configuration() {
 
@@ -82,8 +84,6 @@ function Configuration() {
             setIsLoading(false);
         }
     };
-
-
     // Función para avanzar al siguiente paso
     const nextStep = () => {
         if (currentStep < 3) setCurrentStep(currentStep + 1);
@@ -99,7 +99,7 @@ function Configuration() {
         switch (currentStep) {
             case 1:
                 return (
-                    <>
+                    <>                  
                         <View style={styles.imputContainer}>
                             <View>
                                 <Text style={styles.text}>Codigo de alta</Text>
@@ -137,12 +137,16 @@ function Configuration() {
                                     <MaterialIcons name={"vpn-key"} size={24} color="#000" style={styles.icon} />
                                 </View>
                             </View>
-                        </View>
+                        </View>                  
                     </>
                 );
             case 2:
                 return (
                     <>
+                     <KeyboardAwareScrollView
+                     contentContainerStyle={{ flexGrow: 1 }}
+                     enableOnAndroid={true}
+                     extraHeight={150}>
                         <View style={styles.imputContainer}>
 
                             <View>
@@ -206,13 +210,13 @@ function Configuration() {
                                 </View>
                             </View>
                         </View>
+                        </KeyboardAwareScrollView>
                     </>
                 );
             default:
                 return null;
         }
     };
-
     return (
         <>
             {isLoading ? (
@@ -226,12 +230,13 @@ function Configuration() {
                     </View>
                     {currentStep > 1 && (
                         <View style={styles.button2}>
+                            
                             <Button title="Anterior" onPress={previousStep} />
                         </View>
                     )}
                     {currentStep < 2 ? (
                         <View style={styles.button1}>
-                            <Button title="Siguiente" onPress={nextStep} />
+                            <Button title="Siguiente" onPress={nextStep}  />
                         </View>
                     ) : (
                         <View style={styles.button}>
