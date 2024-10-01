@@ -1,11 +1,9 @@
-import { View, StyleSheet, ImageBackground,Alert } from "react-native";
+import { View, StyleSheet, ImageBackground,Alert,Dimensions} from "react-native";
 import { styles1,styles2,styles3,styles4 } from "../constans/Styles";
 import * as SMS from 'expo-sms';
 
 import PrimaryButton from "../component/PrimaryButton";
 import SecondaryButton from "../component/SecondaryButton";
-
-
 
   const AllButtons = () => {
 
@@ -24,7 +22,7 @@ import SecondaryButton from "../component/SecondaryButton";
   return (
     <>
             <ImageBackground
-                source={require('../assets/civico.jpg')}
+                source={require('../assets/civico.jpg')}   
                 resizeMode="cover"
                 style={styles.rootScreen}>
                 <View style={styles.seconButtonContainer}>
@@ -51,10 +49,11 @@ import SecondaryButton from "../component/SecondaryButton";
     );
   }
 export default AllButtons;
+const deviceWidth=Dimensions.get("window").width
 
 const styles = StyleSheet.create({
     primaryButtonContainer: {
-        marginTop:20
+        marginTop: deviceWidth > 3000? 200:20,
     },
     seconButtonContainer: {
         marginTop:70,
