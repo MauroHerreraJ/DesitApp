@@ -1,8 +1,7 @@
-import { View, Text, Button, TextInput, ActivityIndicator } from "react-native";
+import { View, Text, TextInput, ActivityIndicator, Platform, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
-import { GlobalStyles } from "../constans/Colors";
 import { postUserData } from "../util/Api";
 import { MaterialIcons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -99,10 +98,10 @@ function Configuration() {
         switch (currentStep) {
             case 1:
                 return (
-                    <>                  
+                    <>
                         <View style={styles.imputContainer}>
                             <View>
-                                <Text style={styles.text}>Codigo de alta</Text>
+                                <Text style={styles.text}>Código de Alta</Text>
                                 <View style={styles.textContainer}>
                                     <TextInput
                                         style={styles.textImput}
@@ -137,79 +136,79 @@ function Configuration() {
                                     <MaterialIcons name={"vpn-key"} size={24} color="#000" style={styles.icon} />
                                 </View>
                             </View>
-                        </View>                  
+                        </View>
                     </>
                 );
             case 2:
                 return (
                     <>
-                     <KeyboardAwareScrollView
-                     contentContainerStyle={{ flexGrow: 1 }}
-                     enableOnAndroid={true}
-                     extraHeight={150}>
-                        <View style={styles.imputContainer}>
+                        <KeyboardAwareScrollView
+                            contentContainerStyle={{ flexGrow: 1 }}
+                            enableOnAndroid={true}
+                            extraHeight={150}>
+                            <View style={styles.imputContainer}>
 
-                            <View>
-                                <Text style={styles.text}>Nombre</Text>
-                                <View style={styles.textContainer}>
-                                    <TextInput
-                                        style={styles.textImput}
-                                        placeholder='Ingrese su Nombre'
-                                        onChangeText={(text) => handleChange("Nombre", text)}
-                                        value={licencias.Nombre}
-                                    />
-                                    <MaterialIcons name={"person"} size={24} color="#000" style={styles.icon} />
+                                <View>
+                                    <Text style={styles.text}>Nombre</Text>
+                                    <View style={styles.textContainer}>
+                                        <TextInput
+                                            style={styles.textImput}
+                                            placeholder='Ingrese su Nombre'
+                                            onChangeText={(text) => handleChange("Nombre", text)}
+                                            value={licencias.Nombre}
+                                        />
+                                        <MaterialIcons name={"person"} size={24} color="#000" style={styles.icon} />
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text style={styles.text}>Apellido</Text>
+                                    <View style={styles.textContainer}>
+                                        <TextInput
+                                            style={styles.textImput}
+                                            placeholder='Ingrese su Apellido'
+                                            onChangeText={(text) => handleChange("Apellido", text)}
+                                            value={licencias.Apellido}
+                                        />
+                                        <MaterialIcons name={"person"} size={24} color="#000" style={styles.icon} />
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text style={styles.text}>Documento</Text>
+                                    <View style={styles.textContainer}>
+                                        <TextInput
+                                            style={styles.textImput}
+                                            placeholder='Ingrese su Documento'
+                                            onChangeText={(text) => handleChange("Documento", text)}
+                                            value={licencias.Documento}
+                                        />
+                                        <MaterialIcons name={"subtitles"} size={24} color="#000" style={styles.icon} />
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text style={styles.text}>Direccion</Text>
+                                    <View style={styles.textContainer}>
+                                        <TextInput
+                                            style={styles.textImput}
+                                            placeholder='Ingrese su Dirección'
+                                            onChangeText={(text) => handleChange("Direccion", text)}
+                                            value={licencias.Direccion}
+                                        />
+                                        <MaterialIcons name={"location-on"} size={24} color="#000" style={styles.icon} />
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text style={styles.text}>Barrio</Text>
+                                    <View style={styles.textContainer}>
+                                        <TextInput
+                                            style={styles.textImput}
+                                            placeholder='Ingrese su Barrio'
+                                            onChangeText={(text) => handleChange("Barrio", text)}
+                                            value={licencias.Barrio}
+                                        />
+                                        <MaterialIcons name={"location-on"} size={24} color="#000" style={styles.icon} />
+                                    </View>
                                 </View>
                             </View>
-                            <View>
-                                <Text style={styles.text}>Apellido</Text>
-                                <View style={styles.textContainer}>
-                                    <TextInput
-                                        style={styles.textImput}
-                                        placeholder='Ingrese su Apellido'
-                                        onChangeText={(text) => handleChange("Apellido", text)}
-                                        value={licencias.Apellido}
-                                    />
-                                    <MaterialIcons name={"person"} size={24} color="#000" style={styles.icon} />
-                                </View>
-                            </View>
-                            <View>
-                                <Text style={styles.text}>Documento</Text>
-                                <View style={styles.textContainer}>
-                                    <TextInput
-                                        style={styles.textImput}
-                                        placeholder='Ingrese su documento'
-                                        onChangeText={(text) => handleChange("Documento", text)}
-                                        value={licencias.Documento}
-                                    />
-                                    <MaterialIcons name={"subtitles"} size={24} color="#000" style={styles.icon} />
-                                </View>
-                            </View>
-                            <View>
-                                <Text style={styles.text}>Direccion</Text>
-                                <View style={styles.textContainer}>
-                                    <TextInput
-                                        style={styles.textImput}
-                                        placeholder='Ingrese su direccion'
-                                        onChangeText={(text) => handleChange("Direccion", text)}
-                                        value={licencias.Direccion}
-                                    />
-                                    <MaterialIcons name={"location-on"} size={24} color="#000" style={styles.icon} />
-                                </View>
-                            </View>
-                            <View>
-                                <Text style={styles.text}>Barrio</Text>
-                                <View style={styles.textContainer}>
-                                    <TextInput
-                                        style={styles.textImput}
-                                        placeholder='Ingrese su Barrio'
-                                        onChangeText={(text) => handleChange("Barrio", text)}
-                                        value={licencias.Barrio}
-                                    />
-                                    <MaterialIcons name={"location-on"} size={24} color="#000" style={styles.icon} />
-                                </View>
-                            </View>
-                        </View>
                         </KeyboardAwareScrollView>
                     </>
                 );
@@ -229,14 +228,30 @@ function Configuration() {
                         {renderStep()}
                     </View>
                     {currentStep > 1 && (
-                        <View style={styles.button2}>
-                            
-                            <Button title="Anterior" onPress={previousStep} />
+                        <View style={styles.buttonContainer1}>
+                           
+                            <Pressable
+                                onPress={previousStep}
+                                style={styles.button1}
+                            >
+                                 <View style={styles.iconContainer}>
+                                <MaterialIcons name={"arrow-back"} size={24} color="#ffffff" style={styles.icon2} />
+                                <Text style={styles.textButton}>ANTERIOR</Text>
+                                 </View>
+                            </Pressable>
                         </View>
                     )}
                     {currentStep < 2 ? (
-                        <View style={styles.button1}>
-                            <Button title="Siguiente" onPress={nextStep}  />
+                        <View style={styles.buttonContainer1}>
+                            <Pressable
+                                onPress={nextStep}
+                                style={styles.button1}
+                            >
+                                <View style={styles.iconContainer}>
+                                <Text style={styles.textButton}>SIGUIENTE</Text>
+                                <MaterialIcons name={"arrow-forward"} size={24} color="#ffffff" style={styles.icon} />
+                                </View>
+                            </Pressable>
                         </View>
                     ) : (
                         <View style={styles.button}>
@@ -256,21 +271,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     button: {
-        marginTop: 1
-
-    },
-    buttonUpdateI: {
-        paddingTop: 5,
-        paddingBottom: 10,
-        borderRadius: 5,
-        marginTop: 30,
-        backgroundColor: GlobalStyles.colors.inputcontainer,
-        width: 120,
-        alignContent: 'center'
-    },
-    buttonContainer: {
-        marginHorizontal: 1,
-        marginTop: 20,
+        marginTop: 55
     },
     imputContainer: {
         padding: 20,
@@ -278,10 +279,6 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "black"
-    },
-    container: {
-        flexDirection: 'row',
-
     },
     textContainer: {
         marginTop: 3,
@@ -291,7 +288,6 @@ const styles = StyleSheet.create({
         borderColor: "#ffffff",
         backgroundColor: "#ffffff",
         borderRadius: 6,
-
     },
     textImput: {
         flex: 1,
@@ -310,19 +306,44 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
     },
-    backgroundImage: {
-        opacity: 1,
-    },
-    button1: {
-        marginTop: 30,
-        width: 189,
-        height: 100,
-        marginLeft: 215,
-    },
     button2: {
         marginTop: 10,
         width: 189,
         height: 100,
         marginLeft: 215,
+    },
+    buttonContainer1: {
+        marginTop: 10,
+        marginLeft: 150,
+        alignItems: "center",
+    },
+    button1: {
+        padding: 10,
+        width: 250,
+        height: 45,
+        margin: 8,
+        borderRadius: 8,
+        overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+        backgroundColor: '#009CDE',
+        elevation: 4,
+        shadowColor: 'black',
+        shadowOpacity: 0.25,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 8,
+        alignItems: "center",
+        opacity: 0.9
+    },
+    textButton: {
+        color: "white",
+        fontSize: 15,
+        width: "100%",
+        textAlign: "center",
+    },
+    iconContainer:{
+        flexDirection:"row",
+        alignItems:"stretch"
+    },
+    icon2:{
+        marginLeft:10
     }
 })
