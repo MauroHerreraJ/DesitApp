@@ -4,7 +4,7 @@
     "slug": "DesitApp",
     "version": "1.0.0",
     "orientation": "portrait", 
-    "icon": "./assets/logonuevo.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/cba-logo2.png",
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logonuevo.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.herreramauro.DesitApp"

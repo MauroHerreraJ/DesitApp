@@ -105,7 +105,7 @@ function Configuration() {
                                 <View style={styles.textContainer}>
                                     <TextInput
                                         style={styles.textImput}
-                                        placeholder='Ingrese Código'
+                                        placeholder='Ingrese el código'
                                         onChangeText={(text) => handleChange("panicAppCode", text)}
                                         value={licencias.panicAppCode}
                                     />
@@ -153,7 +153,7 @@ function Configuration() {
                                     <View style={styles.textContainer}>
                                         <TextInput
                                             style={styles.textImput}
-                                            placeholder='Ingrese su Nombre'
+                                            placeholder='Ingrese su nombre'
                                             onChangeText={(text) => handleChange("Nombre", text)}
                                             value={licencias.Nombre}
                                         />
@@ -165,7 +165,7 @@ function Configuration() {
                                     <View style={styles.textContainer}>
                                         <TextInput
                                             style={styles.textImput}
-                                            placeholder='Ingrese su Apellido'
+                                            placeholder='Ingrese su apellido'
                                             onChangeText={(text) => handleChange("Apellido", text)}
                                             value={licencias.Apellido}
                                         />
@@ -177,7 +177,7 @@ function Configuration() {
                                     <View style={styles.textContainer}>
                                         <TextInput
                                             style={styles.textImput}
-                                            placeholder='Ingrese su Documento'
+                                            placeholder='Ingrese su documento'
                                             onChangeText={(text) => handleChange("Documento", text)}
                                             value={licencias.Documento}
                                         />
@@ -189,7 +189,7 @@ function Configuration() {
                                     <View style={styles.textContainer}>
                                         <TextInput
                                             style={styles.textImput}
-                                            placeholder='Ingrese su Dirección'
+                                            placeholder='Ingrese su dirección'
                                             onChangeText={(text) => handleChange("Direccion", text)}
                                             value={licencias.Direccion}
                                         />
@@ -201,7 +201,7 @@ function Configuration() {
                                     <View style={styles.textContainer}>
                                         <TextInput
                                             style={styles.textImput}
-                                            placeholder='Ingrese su Barrio'
+                                            placeholder='Ingrese su barrio'
                                             onChangeText={(text) => handleChange("Barrio", text)}
                                             value={licencias.Barrio}
                                         />

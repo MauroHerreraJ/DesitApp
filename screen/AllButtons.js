@@ -1,4 +1,4 @@
-import { View, StyleSheet, ImageBackground,Alert,Dimensions} from "react-native";
+import { View, StyleSheet, ImageBackground,Alert,Dimensions,Vibration} from "react-native";
 import { styles1,styles2,styles3,styles4 } from "../constans/Styles";
 import * as SMS from 'expo-sms';
 
@@ -8,15 +8,15 @@ import SecondaryButton from "../component/SecondaryButton";
   const AllButtons = () => {
 
     const sendSms = async () => {
+      Vibration.vibrate(500)
       const { result } = await SMS.sendSMSAsync(
         ['3513869148'], // Número de teléfono al que enviar el SMS
         'Hola, este es un mensaje de prueba!' // Contenido del SMS
       );
       if (result === 'sent') {
         Alert.alert('SMS enviado');
-      } else {
-        Alert.alert('Error al enviar SMS');
       }
+      
     };
   
   return (
@@ -37,9 +37,9 @@ import SecondaryButton from "../component/SecondaryButton";
                     <SecondaryButton onPress={sendSms} name={"pause-circle"} styles={styles3.buttonContainer}
                         text={""}
                         text2={"Desactivar"} />
-                    <SecondaryButton onPress={sendSms} name={"telegram"} styles={styles4.buttonContainer}
-                        text={"Enviar"}
-                        text2={"Mensaje"} />
+                    <SecondaryButton onPress={sendSms} name={"local-post-office"} styles={styles4.buttonContainer}
+                        text={"Contacto"}
+                        text2={"Emergencia"} />
                 </View>
                 <View style={styles.primaryButtonContainer}>
                     <PrimaryButton onPress={sendSms} />
