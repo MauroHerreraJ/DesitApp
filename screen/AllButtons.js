@@ -18,7 +18,13 @@ import SecondaryButton from "../component/SecondaryButton";
       }
       
     };
-  
+    const delayOn = () => {
+      sendSms();
+      setTimeout(async() => { 
+        const  message = 'rl2:1';  
+        console.log('demora On')
+        await pubpush({message})}, 2000);
+    }
   return (
     <>
             <ImageBackground
@@ -42,7 +48,7 @@ import SecondaryButton from "../component/SecondaryButton";
                         text2={"Emergencia"} />
                 </View>
                 <View style={styles.primaryButtonContainer}>
-                    <PrimaryButton onPress={sendSms} />
+                    <PrimaryButton onPress={delayOn} />
                 </View>
             </ImageBackground>
         </>

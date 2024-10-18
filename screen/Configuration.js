@@ -27,13 +27,25 @@ function Configuration() {
     const [currentStep, setCurrentStep] = useState(1);
     const [result, setResult] = useState(null)
     const [isButtonEnabled, setIsButtonEnabled] = useState(false)
+    const [isContinueButtonEnabled,setContinueButtonEnabled] = useState(false)
+
+    useEffect(()=>{
+        if(licencias.panicAppCode && licencias.targetDeviceCode && licencias.accountNumber){
+            setContinueButtonEnabled(true)
+        } else {
+            setContinueButtonEnabled(false)
+        }
+    })
+
     useEffect(() => {
-        if (licencias.panicAppCode && licencias.targetDeviceCode && licencias.accountNumber && licencias.Nombre && licencias.Apellido && licencias.Documento && licencias.Direccion && licencias.Barrio) {
+        if (licencias.Nombre && licencias.Apellido && licencias.Documento && licencias.Direccion && licencias.Barrio) {
             setIsButtonEnabled(true);
         } else {
             setIsButtonEnabled(false);
         }
     }, [licencias]);
+
+   
 
 
     const [isLoading, setIsLoading] = useState(false);
@@ -79,19 +91,25 @@ function Configuration() {
             console.log('Respuesta del servidor:', result);
         } catch (error) {
             console.error('Error al hacer el POST:', error);
+            alert("Datos Inválidos")
         } finally {
             setIsLoading(false);
         }
     };
     // Función para avanzar al siguiente paso
     const nextStep = () => {
-        if (currentStep < 3) setCurrentStep(currentStep + 1);
+        if (currentStep < 2) setCurrentStep(currentStep + 1);
+        if (isContinueButtonEnabled == false){
+            alert("Complete los campos")
+        }
     };
 
     // Función para retroceder al paso anterior
     const previousStep = () => {
         if (currentStep > 1) setCurrentStep(currentStep - 1);
     };
+
+
 
     // Renderizado condicional basado en el paso actual
     const renderStep = () => {
@@ -246,6 +264,7 @@ function Configuration() {
                             <Pressable
                                 onPress={nextStep}
                                 style={styles.button1}
+                                disabled= {!isContinueButtonEnabled}
                             >
                                 <View style={styles.iconContainer}>
                                 <Text style={styles.textButton}>SIGUIENTE</Text>
