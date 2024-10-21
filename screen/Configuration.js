@@ -119,11 +119,11 @@ function Configuration() {
                     <>
                         <View style={styles.imputContainer}>
                             <View>
-                                <Text style={styles.text}>Código de Alta</Text>
                                 <View style={styles.textContainer}>
                                     <TextInput
                                         style={styles.textImput}
                                         placeholder='Ingrese el código'
+                                         placeholderTextColor="#616060"
                                         onChangeText={(text) => handleChange("panicAppCode", text)}
                                         value={licencias.panicAppCode}
                                     />
@@ -131,11 +131,11 @@ function Configuration() {
                                 </View>
                             </View>
                             <View>
-                                <Text style={styles.text}>Número de Equipo</Text>
                                 <View style={styles.textContainer}>
                                     <TextInput
                                         style={styles.textImput}
                                         placeholder='Ingrese número de equipo'
+                                         placeholderTextColor="#616060"
                                         onChangeText={(text) => handleChange("targetDeviceCode", text)}
                                         value={licencias.targetDeviceCode}
                                     />
@@ -143,11 +143,11 @@ function Configuration() {
                                 </View>
                             </View>
                             <View>
-                                <Text style={styles.text}>Número de Cuenta</Text>
                                 <View style={styles.textContainer}>
                                     <TextInput
                                         style={styles.textImput}
                                         placeholder='Ingrese número de cuenta'
+                                         placeholderTextColor="#616060"
                                         onChangeText={(text) => handleChange("accountNumber", text)}
                                         value={licencias.accountNumber}
                                     />
@@ -165,61 +165,60 @@ function Configuration() {
                             enableOnAndroid={true}
                             extraHeight={150}>
                             <View style={styles.imputContainer}>
-
-                                <View>
-                                    <Text style={styles.text}>Nombre</Text>
+                                <View>                                  
                                     <View style={styles.textContainer}>
                                         <TextInput
                                             style={styles.textImput}
                                             placeholder='Ingrese su nombre'
+                                             placeholderTextColor="#616060"
                                             onChangeText={(text) => handleChange("Nombre", text)}
                                             value={licencias.Nombre}
                                         />
                                         <MaterialIcons name={"person"} size={24} color="#000" style={styles.icon} />
                                     </View>
                                 </View>
-                                <View>
-                                    <Text style={styles.text}>Apellido</Text>
+                                <View>                                  
                                     <View style={styles.textContainer}>
                                         <TextInput
                                             style={styles.textImput}
                                             placeholder='Ingrese su apellido'
+                                             placeholderTextColor="#616060"
                                             onChangeText={(text) => handleChange("Apellido", text)}
                                             value={licencias.Apellido}
                                         />
                                         <MaterialIcons name={"person"} size={24} color="#000" style={styles.icon} />
                                     </View>
                                 </View>
-                                <View>
-                                    <Text style={styles.text}>Documento</Text>
+                                <View>                                  
                                     <View style={styles.textContainer}>
                                         <TextInput
                                             style={styles.textImput}
                                             placeholder='Ingrese su documento'
+                                             placeholderTextColor="#616060"
                                             onChangeText={(text) => handleChange("Documento", text)}
                                             value={licencias.Documento}
                                         />
                                         <MaterialIcons name={"subtitles"} size={24} color="#000" style={styles.icon} />
                                     </View>
                                 </View>
-                                <View>
-                                    <Text style={styles.text}>Direccion</Text>
+                                <View>                               
                                     <View style={styles.textContainer}>
                                         <TextInput
                                             style={styles.textImput}
                                             placeholder='Ingrese su dirección'
+                                             placeholderTextColor="#616060"
                                             onChangeText={(text) => handleChange("Direccion", text)}
                                             value={licencias.Direccion}
                                         />
                                         <MaterialIcons name={"location-on"} size={24} color="#000" style={styles.icon} />
                                     </View>
                                 </View>
-                                <View>
-                                    <Text style={styles.text}>Barrio</Text>
+                                <View>                              
                                     <View style={styles.textContainer}>
                                         <TextInput
                                             style={styles.textImput}
                                             placeholder='Ingrese su barrio'
+                                            placeholderTextColor="#616060"
                                             onChangeText={(text) => handleChange("Barrio", text)}
                                             value={licencias.Barrio}
                                         />
@@ -295,9 +294,6 @@ const styles = StyleSheet.create({
     imputContainer: {
         padding: 20,
         marginTop: 5
-    },
-    text: {
-        color: "black"
     },
     textContainer: {
         marginTop: 3,

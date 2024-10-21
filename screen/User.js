@@ -26,7 +26,6 @@ function User() {
       loadLicencia();
     }, [])
   );
-
   // Ejecuta la función cuando se monta el componente
   useEffect(() => {
     loadLicencia();
@@ -54,7 +53,6 @@ function User() {
       </>
     );
   }
-
   return (
     <>
       <View style={styles.dataContainer}>
@@ -90,14 +88,12 @@ function User() {
         <Image source={require("../assets/logonuevo.png")}
           style={{ width: 59, height: 59 }} />
       </View>
-
       <View>
         <Text style={styles.textImage}>Producto desarrollado por Desit SA</Text>
       </View>
     </>
   );
 }
-
 export default User;
 const styles = StyleSheet.create({
   dataContainer: {

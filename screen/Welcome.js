@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, Platform, ImageBackground, Pressable } from "react-native";
+import { View, Text, Image, StyleSheet, Platform, Pressable } from "react-native";
 
 
 function Welcome({ navigation }) {
@@ -28,7 +28,6 @@ function Welcome({ navigation }) {
         </>
     )
 }
-
 export default Welcome;
 
 const styles = StyleSheet.create({
@@ -62,7 +61,6 @@ const styles = StyleSheet.create({
         shadowRadius: 8,
         alignItems: "center",
         opacity:0.9
-
     },
     textButton: {
         color: "white",

@@ -1,17 +1,19 @@
 {
   "cli": {
-    "version": ">= 10.2.4"
+    "version": ">= 9.0.5"
   },
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal"      
     },
     "preview": {
-       "distribution": "internal",
-       "android": {
-       "buildType": "apk"
-      
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": false
       }
     },
     "production": {}
