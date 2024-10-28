@@ -5,19 +5,48 @@ import * as SMS from 'expo-sms';
 import PrimaryButton from "../component/PrimaryButton";
 import SecondaryButton from "../component/SecondaryButton";
 
-  const AllButtons = () => {
+  const AllButtons = ({navigation}) => {
 
     const sendSms = async () => {
       Vibration.vibrate(500)
       const { result } = await SMS.sendSMSAsync(
-        ['3513869148'], // Número de teléfono al que enviar el SMS
-        'Hola, este es un mensaje de prueba!' // Contenido del SMS
+        ['1163776198'], // Número de teléfono al que enviar el SMS
+        'EVT;0052;120;0' // Contenido del SMS
       );
       if (result === 'sent') {
         Alert.alert('SMS enviado');
       }
-      
     };
+    const sendSmsLight = async () => {
+      Vibration.vibrate(500)
+      const { result } = await SMS.sendSMSAsync(
+        ['1163776198'], // Número de teléfono al que enviar el SMS
+        'EVT;0052;101;0' // Contenido del SMS
+      );
+      if (result === 'sent') {
+        Alert.alert('SMS enviado');
+      }
+    };
+    const sendSmsSiren = async () => {
+      Vibration.vibrate(500)
+      const { result } = await SMS.sendSMSAsync(
+        ['1163776198'], // Número de teléfono al que enviar el SMS
+        'EVT;0052;102;0' // Contenido del SMS
+      );
+      if (result === 'sent') {
+        Alert.alert('SMS enviado');
+      }
+    };
+    const sendSmsDeactivate = async () => {
+      Vibration.vibrate(500)
+      const { result } = await SMS.sendSMSAsync(
+        ['1163776198'], // Número de teléfono al que enviar el SMS
+        'EVT;0052;103;0' // Contenido del SMS
+      );
+      if (result === 'sent') {
+        Alert.alert('SMS enviado');
+      }
+    };  
     const delayOn = () => {
       sendSms();
       setTimeout(async() => { 
@@ -25,6 +54,9 @@ import SecondaryButton from "../component/SecondaryButton";
         console.log('demora On')
         await pubpush({message})}, 2000);
     }
+  //   function Sms() {
+  //     navigation.navigate("Message"); // Screen Contacto de emergencias
+  // }
   return (
     <>
             <ImageBackground
@@ -32,23 +64,23 @@ import SecondaryButton from "../component/SecondaryButton";
                 resizeMode="cover"
                 style={styles.rootScreen}>
                 <View style={styles.seconButtonContainer}>
-                    <SecondaryButton onPress={sendSms} name={"wb-sunny"} styles={styles1.buttonContainer}
+                    <SecondaryButton onPress={sendSmsLight} name={"wb-sunny"} styles={styles1.buttonContainer}
                         text={"Encender"}
                         text2={"Reflector"} />
-                    <SecondaryButton onPress={sendSms} name={"notifications-active"} styles={styles2.buttonContainer}
+                    <SecondaryButton onPress={sendSmsSiren} name={"notifications-active"} styles={styles2.buttonContainer}
                         text={"Encender"}
                         text2={"Sirena"} />
                 </View>
                 <View style={styles.lowSeconButtonContainer}>
-                    <SecondaryButton onPress={sendSms} name={"pause-circle"} styles={styles3.buttonContainer}
+                    <SecondaryButton onPress={sendSmsDeactivate} name={"pause-circle"} styles={styles3.buttonContainer}
                         text={""}
                         text2={"Desactivar"} />
-                    <SecondaryButton onPress={sendSms} name={"local-post-office"} styles={styles4.buttonContainer}
+                    {/* <SecondaryButton onPress={Sms} name={"local-post-office"} styles={styles4.buttonContainer}
                         text={"Contacto"}
-                        text2={"Emergencia"} />
+                        text2={"Emergencia"} /> */}
                 </View>
                 <View style={styles.primaryButtonContainer}>
-                    <PrimaryButton onPress={delayOn} />
+                    <PrimaryButton onPress={sendSms} />
                 </View>
             </ImageBackground>
         </>

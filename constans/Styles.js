@@ -39,10 +39,10 @@ export const styles2 = StyleSheet.create({
 
 export const styles3 = StyleSheet.create({
     buttonContainer: {
-        padding: 30,
+        padding: 20,
         margin: 8,
-        width: 189,
-        height: 150,
+        width: 395,
+        height: 130,
         borderRadius: 26,
         overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
         backgroundColor: GlobalStyles.colors.gray500,

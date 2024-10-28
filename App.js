@@ -13,6 +13,7 @@ import AllButtons from './screen/AllButtons';
 import Configuration from './screen/Configuration';
 import User from './screen/User';
 import welcome from './screen/Welcome';
+import MessageConfig from './screen/MessageConfig';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -141,6 +142,10 @@ export default function App() {
           <Stack.Screen
             name='Welcome'
             component={welcome}
+          />
+          <Stack.Screen
+          name="Message"
+          component={MessageConfig}
           />
           <Stack.Screen
             name="User"

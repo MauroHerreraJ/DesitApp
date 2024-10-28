@@ -7,6 +7,33 @@ import { useFocusEffect } from '@react-navigation/native';
 function User() {
   const [licencia, setLicencia] = useState(null);
 
+  // Función para traducir el estado
+  const translateStatus = (status) => {
+    switch (status) {
+      case 'active':
+        return 'Activo';
+      case 'inactive':
+        return 'Inactivo';
+      case 'pending':
+        return 'Pendiente';
+      case 'expired':
+        return 'Expirado';
+      case 'accepted':
+        return 'Aceptado';  // Traducción de "accepted"
+      default:
+        return status; // Si no se encuentra una traducción, se muestra el valor original
+    }
+  };
+  const maskLicenseCode = (code) => {
+    if (!code) return ''; // Devuelve una cadena vacía si code es null o undefined
+    if (code.length > 24) {
+      // Reemplazamos los primeros 24 caracteres con asteriscos
+      return '*'.repeat(24) + code.slice(24);
+    }
+    return code; // Si el código tiene menos de 24 caracteres, se devuelve tal cual
+  };
+  
+
   // Función para recuperar la licencia almacenada
   const loadLicencia = async () => {
     try {
@@ -20,20 +47,24 @@ function User() {
       console.log("Error al cargar la licencia", error);
     }
   };
+
   // Ejecuta la función cada vez que la pantalla se enfoca
   useFocusEffect(
     useCallback(() => {
       loadLicencia();
     }, [])
   );
+
   // Ejecuta la función cuando se monta el componente
   useEffect(() => {
     loadLicencia();
   }, []);
+
   const Borrar = async () => {
     await AsyncStorage.removeItem('@licencias');
     console.log('borrado');
   };
+
   // Verifica si hay datos de licencia para mostrar
   if (!licencia) {
     return (
@@ -53,6 +84,7 @@ function User() {
       </>
     );
   }
+
   return (
     <>
       <View style={styles.dataContainer}>
@@ -63,10 +95,10 @@ function User() {
             <View style={styles.underline}></View>
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.text}>Licencia: </Text>
-            <Text style={styles.textData}>{licencia.code}</Text>
-            <View style={styles.underline}></View>
-          </View>
+          <Text style={styles.text}>Licencia: </Text>
+          <Text style={styles.textData}>{maskLicenseCode(licencia.code)}</Text> {/* Aplicamos la función de máscara */}
+          <View style={styles.underline}></View>
+        </View>
           <View style={styles.textContainer}>
             <Text style={styles.text}>Equipo: </Text>
             <Text style={styles.textData}>{licencia.targetDeviceCode}</Text>
@@ -74,7 +106,9 @@ function User() {
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.text}>Estado </Text>
-            <Text style={styles.textData}>{licencia.status}</Text>
+            <Text style={styles.textData}>
+              {licencia.status ? translateStatus(licencia.status) : 'Desconocido'}
+            </Text>
             <View style={styles.underline}></View>
           </View>
         </View>
@@ -94,7 +128,9 @@ function User() {
     </>
   );
 }
+
 export default User;
+
 const styles = StyleSheet.create({
   dataContainer: {
     flex: 1,
