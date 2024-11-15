@@ -96,12 +96,12 @@ function User() {
           </View>
           <View style={styles.textContainer}>
           <Text style={styles.text}>Licencia: </Text>
-          <Text style={styles.textData}>{maskLicenseCode(licencia.code)}</Text> {/* Aplicamos la función de máscara */}
+          <Text style={styles.textData}>{licencia.code}</Text> 
           <View style={styles.underline}></View>
         </View>
           <View style={styles.textContainer}>
             <Text style={styles.text}>Equipo: </Text>
-            <Text style={styles.textData}>{licencia.targetDeviceCode}</Text>
+            <Text style={styles.textData}>{maskLicenseCode (licencia.targetDeviceCode)}</Text>
             <View style={styles.underline}></View>
           </View>
           <View style={styles.textContainer}>
