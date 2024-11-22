@@ -65,7 +65,7 @@ function User() {
     console.log('borrado');
   };
 
-  // Verifica si hay datos de licencia para mostrar
+  //Verifica si hay datos de licencia para mostrar
   if (!licencia) {
     return (
       <>
@@ -112,12 +112,10 @@ function User() {
             <View style={styles.underline}></View>
           </View>
         </View>
-      </View>
-      <View style={styles.buttonContainer1}>
-        <TouchableOpacity style={styles.buttonUpdateI} onPress={Borrar}>
+      <View style={styles.container2}>
+        <TouchableOpacity style={styles.buttonUpdate} onPress={Borrar}>
           <Text>Borrar</Text>
         </TouchableOpacity>
-      </View>
       <View style={styles.imageContainer}>
         <Image source={require("../assets/logonuevo.png")}
           style={{ width: 59, height: 59 }} />
@@ -125,6 +123,8 @@ function User() {
       <View>
         <Text style={styles.textImage}>Producto desarrollado por Desit SA</Text>
       </View>
+          </View>
+     </View>
     </>
   );
 }
@@ -176,5 +176,8 @@ const styles = StyleSheet.create({
   },
   withoutLicenseContainer: {
     alignItems: "center"
+  }, 
+  container2:{
+    marginTop:255,
   }
 });

@@ -10,7 +10,7 @@ import SecondaryButton from "../component/SecondaryButton";
     const sendSms = async () => {
       Vibration.vibrate(500)
       const { result } = await SMS.sendSMSAsync(
-        ['1164922955'], // Número de teléfono al que enviar el SMS
+        ['1165336342'], // Número de teléfono al que enviar el SMS
         'EVT;0052;120;0' // Contenido del SMS
       );
       if (result === 'sent') {
@@ -20,7 +20,7 @@ import SecondaryButton from "../component/SecondaryButton";
     const sendSmsLight = async () => {
       Vibration.vibrate(500)
       const { result } = await SMS.sendSMSAsync(
-        ['1164922955'], // Número de teléfono al que enviar el SMS
+        ['1165336342'], // Número de teléfono al que enviar el SMS
         'EVT;0052;101;0' // Contenido del SMS
       );
       if (result === 'sent') {
@@ -30,7 +30,7 @@ import SecondaryButton from "../component/SecondaryButton";
     const sendSmsSiren = async () => {
       Vibration.vibrate(500)
       const { result } = await SMS.sendSMSAsync(
-        ['1164922955'], // Número de teléfono al que enviar el SMS
+        ['1165336342'], // Número de teléfono al que enviar el SMS
         'EVT;0052;102;0' // Contenido del SMS
       );
       if (result === 'sent') {
@@ -40,7 +40,7 @@ import SecondaryButton from "../component/SecondaryButton";
     const sendSmsDeactivate = async () => {
       Vibration.vibrate(500)
       const { result } = await SMS.sendSMSAsync(
-        ['1164922955'], // Número de teléfono al que enviar el SMS
+        ['1165336342'], // Número de teléfono al que enviar el SMS
         'EVT;0052;103;0' // Contenido del SMS
       );
       if (result === 'sent') {
