@@ -3,7 +3,7 @@ import { GlobalStyles } from "./Colors";
 
 export const styles1 = StyleSheet.create({
     buttonContainer: {
-        padding: 30,
+        padding: 30, 
         margin: 8,
         width: 189,
         height: 150,
