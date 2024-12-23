@@ -14,7 +14,6 @@ function Welcome({ navigation }) {
 
     return (
         <>
-
             <View style={styles.imageContainer}>
                 <Image source={require("../assets/cba-logo3.png")}
                     style={{ width: 270, height: 100 }} />
@@ -126,7 +125,6 @@ function Welcome({ navigation }) {
                 <Text style={styles.textTitle}>
                     Desit SA Se reserva el derecho de cambiar los términos de la presente Política de Privacidad en cualquier momento
                 </Text>
-
             </ScrollView>
             <View style={styles.container}>
                 <Pressable
@@ -137,8 +135,6 @@ function Welcome({ navigation }) {
                 </Pressable>
                 <Text style={styles.label}>Aceptar términos y condiciones</Text>
             </View>
-
-
             <View style={styles.buttonContainer}>
     <Pressable
         onPress={isChecked ? pressHandler : null} // Solo habilita onPress si isChecked es true
@@ -150,7 +146,6 @@ function Welcome({ navigation }) {
         <Text style={styles.textButton}>CONTINUAR</Text>
     </Pressable>
 </View>
-
         </>
     )
 }
