@@ -32,8 +32,6 @@ function User() {
     }
     return code; // Si el código tiene menos de 24 caracteres, se devuelve tal cual
   };
-  
-
   // Función para recuperar la licencia almacenada
   const loadLicencia = async () => {
     try {
@@ -47,24 +45,20 @@ function User() {
       console.log("Error al cargar la licencia", error);
     }
   };
-
   // Ejecuta la función cada vez que la pantalla se enfoca
   useFocusEffect(
     useCallback(() => {
       loadLicencia();
     }, [])
   );
-
   // Ejecuta la función cuando se monta el componente
   useEffect(() => {
     loadLicencia();
   }, []);
-
   const Borrar = async () => {
     await AsyncStorage.removeItem('@licencias');
     console.log('borrado');
   };
-
   //Verifica si hay datos de licencia para mostrar
   if (!licencia) {
     return (

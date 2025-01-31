@@ -1,27 +1,37 @@
 {
   "cli": {
-    "version": ">= 9.0.5",
+    "version": ">= 14.4.1",
     "appVersionSource": "remote"
   },
   "build": {
+    "development:simulator": {
+      "developmentClient": true,
+      "ios": {
+        "simulator": true
+      }
+    },
     "development": {
       "developmentClient": true,
       "distribution": "internal"
     },
     "preview": {
-      "distribution": "internal",
-      "android": {
-        "buildType": "apk"
-      },
-      "ios": {
-        "simulator": false
-      }
+      "distribution": "internal"
     },
     "production": {
-      "autoIncrement": true
+      "distribution": "store"
+    },
+    "adhoc": {
+      "distribution": "internal",
+      "ios": {
+        "enterpriseProvisioning": "adhoc"
+      }
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleTeamId": "DHEH2FMZNB"
+      }
+    }
   }
 }
