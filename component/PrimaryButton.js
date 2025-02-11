@@ -2,9 +2,13 @@ import { View, Pressable, StyleSheet, Platform, Text } from "react-native"
 import { Ionicons } from "@expo/vector-icons";
 import { GlobalStyles } from "../constans/Colors";
 
-function PrimaryButton({ onPress }) {
+function PrimaryButton({ onPress, onPressIn, onPressOut }) {
     return <View >
-        <Pressable onPress={onPress} style={({ pressed }) => pressed && styles.pressed}>
+        <Pressable 
+        onPress={onPress} 
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        style={({ pressed }) => pressed && styles.pressed}>
             <View style={styles.buttonContainer}>
                 <Ionicons name="warning" size={90} color="white" />
                 <Text style={styles.textButton}>Pánico</Text>
