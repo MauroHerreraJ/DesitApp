@@ -1,10 +1,9 @@
-import { View, Text, TextInput, ActivityIndicator, Platform, Pressable } from "react-native";
+import { View, Text, TextInput, ActivityIndicator, Platform, Pressable, KeyboardAvoidingView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import { postUserData, postToken } from "../util/Api";
 import { MaterialIcons } from "@expo/vector-icons";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import SaveButton from "../component/SaveButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -162,7 +161,7 @@ function Configuration() {
             case 2:
                 return (
                     <>
-                        <KeyboardAwareScrollView
+                        <KeyboardAvoidingView
                             contentContainerStyle={{ flexGrow: 1 }}
                             enableOnAndroid={true}
                             extraHeight={150}>
@@ -228,7 +227,7 @@ function Configuration() {
                                     </View>
                                 </View>
                             </View>
-                        </KeyboardAwareScrollView>
+                        </KeyboardAvoidingView>
                     </>
                 );
             default:

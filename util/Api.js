@@ -66,6 +66,8 @@ export const postToken = async(dataToken) => {
         'Content-Type': 'application/json'
       }
     });
+
+    console.log(response.status)
     
     return response.data;
   } catch (error) {
