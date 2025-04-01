@@ -77,6 +77,9 @@ function User() {
           <View >
             <Text style={styles.withoutLicense}>No posee Licencia...</Text>
           </View>
+          <TouchableOpacity style={styles.buttonUpdate} onPress={Borrar}>
+          <Text>Borrar</Text>
+        </TouchableOpacity>
           <View style={styles.withoutLicenseImage}>
             <Image source={require("../assets/logonuevo.png")}
               style={{ width: 59, height: 59 }} />
@@ -118,14 +121,13 @@ function User() {
           </View>
         </View>
       <View style={styles.container2}>
-       
+      <TouchableOpacity style={styles.buttonUpdate} onPress={Borrar}>
+          <Text>Borrar</Text>
+        </TouchableOpacity>
       <View style={styles.imageContainer}>
         <Image source={require("../assets/logonuevo.png")}
           style={{ width: 59, height: 59 }} />
       </View>
-      <TouchableOpacity style={styles.buttonUpdate} onPress={Borrar}>
-          <Text>Borrar</Text>
-        </TouchableOpacity>
       <View>
         <Text style={styles.textImage}>Producto desarrollado por Desit SA</Text>
       </View>
@@ -173,7 +175,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   withoutLicense: {
-    marginTop: 150,
+    marginTop: 130,
     fontFamily: "open-sans",
     fontSize: 19
   },
