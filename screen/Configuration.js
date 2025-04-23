@@ -13,7 +13,7 @@ function Configuration() {
     const navigation = useNavigation();
     const [licencias, setLicencias] = useState({
         panicAppCode: "",
-        targetDeviceCode: "",
+        targetDeviceId: "",
         accountNumber: "",
         Nombre: "",
         Apellido: "",
@@ -28,7 +28,7 @@ function Configuration() {
     const [isContinueButtonEnabled,setContinueButtonEnabled] = useState(false)
 
     useEffect(()=>{
-        if(licencias.panicAppCode && licencias.targetDeviceCode && licencias.accountNumber){
+        if(licencias.panicAppCode && licencias.targetDeviceId && licencias.accountNumber){
             setContinueButtonEnabled(true)
         } else {
             setContinueButtonEnabled(false)
@@ -54,7 +54,7 @@ function Configuration() {
             setIsLoading(true);
             const data = {
                 panicAppCode: licencias.panicAppCode,
-                targetDeviceCode: licencias.targetDeviceCode,
+                targetDeviceId: licencias.targetDeviceId,
                 accountNumber: licencias.accountNumber,
                 userCustomFields: [
                     { Nombre: licencias.Nombre },
@@ -137,8 +137,8 @@ function Configuration() {
                                         style={styles.textImput}
                                         placeholder='Ingrese número de equipo'
                                          placeholderTextColor="#616060"
-                                        onChangeText={(text) => handleChange("targetDeviceCode", text)}
-                                        value={licencias.targetDeviceCode}
+                                        onChangeText={(text) => handleChange("targetDeviceId", text)}
+                                        value={licencias.targetDeviceId}
                                     />
                                     <MaterialIcons name={"vpn-key"} size={24} color="#000" style={styles.icon} />
                                 </View>

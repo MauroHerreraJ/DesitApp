@@ -32,7 +32,8 @@ function AuthorizedNavigation() {
         options={{
           title: "",
           tabBarLabel: "Home",
-          tabBarIcon: ({ color, size }) => (<Ionicons name='home-outline' size={size} color={color} />),
+          tabBarIcon: ({ color, size }) => (
+          <Ionicons name='home-outline' size={size} color={color} />),
           headerLeft: () => (
             <Image
               source={require("./assets/cba-logo3.png")}
